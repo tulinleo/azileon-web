@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   Cpu,
   CloudArrowUp,
@@ -35,7 +35,10 @@ const AUTO_SCROLL_SPEED = 12
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [progress, setProgress] = useState(0)
+  const heroLayerRef = useRef<HTMLDivElement>(null)
+  const servicesLayerRef = useRef<HTMLDivElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll state
   const isTouchDevice = useRef(false)
@@ -53,10 +56,19 @@ export default function VideoHero() {
     const container = containerRef.current
     if (!video || !container) return
 
-    // Detect touch device — disable auto-scroll on mobile (fights iOS native scrolling)
     isTouchDevice.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
-    let rafId: number
+    // Direct DOM update — no React setState, no re-renders
+    const updateLayers = (p: number) => {
+      const heroOp = Math.max(1 - p * 3.3, 0)
+      const servicesOp = Math.min(Math.max((p - 0.4) / 0.3, 0), 1)
+      const overlayOp = 0.15 + p * 0.1
+
+      if (heroLayerRef.current) heroLayerRef.current.style.opacity = String(heroOp)
+      if (servicesLayerRef.current) servicesLayerRef.current.style.opacity = String(servicesOp)
+      if (overlayRef.current) overlayRef.current.style.background = `rgba(6,5,3,${overlayOp})`
+      if (scrollIndicatorRef.current) scrollIndicatorRef.current.style.opacity = String(heroOp)
+    }
 
     // Core scroll → video sync
     const syncVideo = () => {
@@ -65,66 +77,56 @@ export default function VideoHero() {
       const scrolled = -rect.top
       const p = Math.min(Math.max(scrolled / scrollHeight, 0), 1)
 
-      setProgress(p)
-
       if (video.duration && video.readyState >= 2) {
         video.currentTime = p * video.duration
       }
 
+      updateLayers(p)
       return p
     }
 
     const handleScroll = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => {
-        const p = syncVideo()
-        const prev = lastProgress.current
-        lastProgress.current = p
+      const p = syncVideo()
+      const prev = lastProgress.current
+      lastProgress.current = p
 
-        const scrollingUp = p < prev - 0.005
-        const now = performance.now()
+      const scrollingUp = p < prev - 0.005
+      const now = performance.now()
 
-        // Track when user first enters the zone
-        if (p > 0.02 && p < 0.98 && scrollStartTime.current === 0) {
-          scrollStartTime.current = now
-        }
-        if (p <= 0.01 || p >= 0.99) {
-          scrollStartTime.current = 0
-        }
+      if (p > 0.02 && p < 0.98 && scrollStartTime.current === 0) {
+        scrollStartTime.current = now
+      }
+      if (p <= 0.01 || p >= 0.99) {
+        scrollStartTime.current = 0
+      }
 
-        // Require 300ms of scrolling + past 4% threshold before triggering
-        const hasScrolledEnough = now - scrollStartTime.current > 300
+      const hasScrolledEnough = now - scrollStartTime.current > 300
 
-        // Auto-scroll only on non-touch devices
-        if (!isTouchDevice.current) {
-          // Trigger auto-scroll DOWN
-          if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
-            triggeredDown.current = true
-            triggeredUp.current = false
-            startAutoScroll('down')
-          }
-
-          // Trigger auto-scroll UP
-          if (scrollingUp && p > 0.02 && p < 0.92 && !triggeredUp.current && !autoScrolling.current && hasScrolledEnough) {
-            triggeredUp.current = true
-            triggeredDown.current = false
-            startAutoScroll('up')
-          }
-        }
-
-        // Reset triggers at edges
-        if (p <= 0.01) {
-          triggeredDown.current = false
+      if (!isTouchDevice.current) {
+        if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
+          triggeredDown.current = true
           triggeredUp.current = false
+          startAutoScroll('down')
         }
-        if (p >= 0.99) {
+
+        if (scrollingUp && p > 0.02 && p < 0.92 && !triggeredUp.current && !autoScrolling.current && hasScrolledEnough) {
+          triggeredUp.current = true
           triggeredDown.current = false
-          triggeredUp.current = false
+          startAutoScroll('up')
         }
-      })
+      }
+
+      if (p <= 0.01) {
+        triggeredDown.current = false
+        triggeredUp.current = false
+      }
+      if (p >= 0.99) {
+        triggeredDown.current = false
+        triggeredUp.current = false
+      }
     }
 
-    // Smooth auto-scroll using rAF — supports both directions
+    // Smooth auto-scroll using rAF
     const startAutoScroll = (dir: 'down' | 'up') => {
       cancelAnimationFrame(autoScrollRaf.current)
       autoScrolling.current = true
@@ -166,7 +168,6 @@ export default function VideoHero() {
       lastWheelTime.current = performance.now()
     }
 
-    // Stop auto-scroll on explicit navigation (link clicks, refresh, hash change)
     const stopAutoScroll = () => {
       cancelAnimationFrame(autoScrollRaf.current)
       autoScrolling.current = false
@@ -189,9 +190,7 @@ export default function VideoHero() {
         video.play().then(() => {
           video.pause()
           video.currentTime = 0
-        }).catch(() => {
-          // Autoplay blocked — video will init on first scroll interaction
-        })
+        }).catch(() => {})
       }
     }
     video.addEventListener('loadedmetadata', initVideo)
@@ -213,19 +212,13 @@ export default function VideoHero() {
       window.removeEventListener('hashchange', stopAutoScroll)
       document.removeEventListener('visibilitychange', stopAutoScroll)
       window.removeEventListener('beforeunload', stopAutoScroll)
-      cancelAnimationFrame(rafId)
       cancelAnimationFrame(autoScrollRaf.current)
     }
   }, [])
 
-  const heroOpacity = Math.max(1 - progress * 3.3, 0)
-  const servicesOpacity = Math.min(Math.max((progress - 0.4) / 0.3, 0), 1)
-  const overlayOpacity = 0.15 + progress * 0.1
-
   return (
     <div ref={containerRef} className="video-scroll-container" id="home">
       <div className="video-sticky">
-        {/* Video */}
         <video
           ref={videoRef}
           muted
@@ -236,13 +229,12 @@ export default function VideoHero() {
           <source src="/az_video.mp4" type="video/mp4" />
         </video>
 
-        {/* Persistent dark overlay */}
         <div
+          ref={overlayRef}
           className="absolute inset-0 pointer-events-none"
-          style={{ background: `rgba(6,5,3,${overlayOpacity})` }}
+          style={{ background: 'rgba(6,5,3,0.15)' }}
         />
 
-        {/* Left-side gradient for hero text readability */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -250,7 +242,6 @@ export default function VideoHero() {
           }}
         />
 
-        {/* Bottom gradient for seamless transition */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -260,8 +251,8 @@ export default function VideoHero() {
 
         {/* ─── Layer 1: Hero text ─── */}
         <div
+          ref={heroLayerRef}
           className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none"
-          style={{ opacity: heroOpacity }}
         >
           <div className="px-6 md:px-16 lg:px-24 max-w-3xl pointer-events-auto">
             <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-4 font-medium font-mono">
@@ -282,8 +273,9 @@ export default function VideoHero() {
 
         {/* ─── Layer 2: "What we do" glass overlay ─── */}
         <div
+          ref={servicesLayerRef}
           className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none overflow-y-auto"
-          style={{ opacity: servicesOpacity }}
+          style={{ opacity: 0 }}
         >
           <div className="w-full max-w-3xl px-4 md:px-16 lg:px-24 py-16 md:py-0 pointer-events-auto" id="services">
             <div className="glass-panel glass-panel-mobile p-5 md:p-12">
@@ -317,8 +309,8 @@ export default function VideoHero() {
 
         {/* Scroll indicator */}
         <div
+          ref={scrollIndicatorRef}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-          style={{ opacity: heroOpacity }}
         >
           <span className="text-[11px] text-white/40 tracking-[0.15em] uppercase font-mono">
             Scroll
