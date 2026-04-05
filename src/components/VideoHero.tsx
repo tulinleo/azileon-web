@@ -228,12 +228,11 @@ export default function VideoHero() {
     <div ref={containerRef} className="video-scroll-container" id="home">
       <div className="video-sticky">
         {/* Video */}
-        {/* eslint-disable-next-line react/no-unknown-property */}
         <video
           ref={videoRef}
           muted
           playsInline
-          // @ts-expect-error webkit-playsinline needed for older iOS Safari
+          // @ts-ignore webkit-playsinline needed for older iOS Safari
           webkit-playsinline=""
           preload="metadata"
           className="block"
