@@ -30,7 +30,7 @@ const services = [
 ]
 
 // Auto-scroll speed: pixels per frame at 60fps
-const AUTO_SCROLL_SPEED = 15
+const AUTO_SCROLL_SPEED = 12
 
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
