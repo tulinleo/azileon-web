@@ -14,13 +14,6 @@ export default function App() {
 
   return (
     <>
-      <div className="grain-overlay" />
-      <div className="ambient-blobs">
-        <div className="ambient-blob ambient-blob-1" />
-        <div className="ambient-blob ambient-blob-2" />
-        <div className="ambient-blob ambient-blob-3" />
-      </div>
-
       <main>
         <Navbar />
         <VideoHero />
