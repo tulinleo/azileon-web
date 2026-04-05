@@ -234,7 +234,7 @@ export default function VideoHero() {
           playsInline
           // @ts-ignore webkit-playsinline needed for older iOS Safari
           webkit-playsinline=""
-          preload="metadata"
+          preload="auto"
           className="block"
         >
           <source src="/az_video.mp4" type="video/mp4" />
