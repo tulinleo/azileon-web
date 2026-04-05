@@ -62,24 +62,19 @@ h1, h2, h3, h4, h5, h6 {
   position: sticky;
   top: 0;
   width: 100%;
+  height: 100vh;
   height: 100dvh;
-  height: 100vh; /* fallback for older Safari */
   overflow: hidden;
-  transform: translateZ(0); /* force GPU layer on iOS */
   -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .video-sticky video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-@supports (-webkit-touch-callout: none) {
-  /* iOS Safari specific */
-  .video-sticky {
-    height: -webkit-fill-available;
-  }
 }
 
 /* ─── Glass panel (dark, over video) ─── */
