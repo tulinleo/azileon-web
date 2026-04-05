@@ -37,7 +37,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-col gap-2.5">
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/yzazileon"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200 no-underline"
@@ -46,7 +46,7 @@ export default function Footer() {
               Yehor Zhyliaiev
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/leonidtulin"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200 no-underline"

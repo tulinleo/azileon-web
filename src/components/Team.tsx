@@ -6,14 +6,14 @@ const members = [
     role: 'Co-founder / Software Architect',
     initials: 'YZ',
     email: 'yz@azileon.cz',
-    linkedin: 'https://linkedin.com/',
+    linkedin: 'https://www.linkedin.com/in/yzazileon',
   },
   {
     name: 'Leonid Tulin',
     role: 'Co-founder / Project Lead',
     initials: 'LT',
     email: 'tulin@azileon.cz',
-    linkedin: 'https://linkedin.com/',
+    linkedin: 'https://www.linkedin.com/in/leonidtulin',
   },
 ]
 
