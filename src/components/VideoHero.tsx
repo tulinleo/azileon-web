@@ -37,6 +37,9 @@ export default function VideoHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
 
+  // Detect touch device (no auto-scroll on mobile — fights native iOS scrolling)
+  const isTouchDevice = useRef(false)
+
   // Auto-scroll state
   const autoScrolling = useRef(false)
   const autoScrollDir = useRef<'down' | 'up'>('down')
@@ -51,6 +54,9 @@ export default function VideoHero() {
     const video = videoRef.current
     const container = containerRef.current
     if (!video || !container) return
+
+    // Detect touch device
+    isTouchDevice.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
     let rafId: number
 
@@ -91,18 +97,21 @@ export default function VideoHero() {
         // Require 300ms of scrolling + past 4% threshold before triggering
         const hasScrolledEnough = now - scrollStartTime.current > 300
 
-        // Trigger auto-scroll DOWN
-        if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
-          triggeredDown.current = true
-          triggeredUp.current = false
-          startAutoScroll('down')
-        }
+        // Auto-scroll only on non-touch devices (fights native iOS scrolling)
+        if (!isTouchDevice.current) {
+          // Trigger auto-scroll DOWN
+          if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
+            triggeredDown.current = true
+            triggeredUp.current = false
+            startAutoScroll('down')
+          }
 
-        // Trigger auto-scroll UP
-        if (scrollingUp && p > 0.02 && p < 0.92 && !triggeredUp.current && !autoScrolling.current && hasScrolledEnough) {
-          triggeredUp.current = true
-          triggeredDown.current = false
-          startAutoScroll('up')
+          // Trigger auto-scroll UP
+          if (scrollingUp && p > 0.02 && p < 0.92 && !triggeredUp.current && !autoScrolling.current && hasScrolledEnough) {
+            triggeredUp.current = true
+            triggeredDown.current = false
+            startAutoScroll('up')
+          }
         }
 
         // Reset triggers at edges
@@ -175,9 +184,19 @@ export default function VideoHero() {
       }
     }
 
-    video.addEventListener('loadedmetadata', () => {
+    // iOS Safari needs a brief play() to initialize video for seeking
+    const initVideo = () => {
       video.currentTime = 0
-    })
+      if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        video.play().then(() => {
+          video.pause()
+          video.currentTime = 0
+        }).catch(() => {
+          // Autoplay blocked — video will init on first scroll interaction
+        })
+      }
+    }
+    video.addEventListener('loadedmetadata', initVideo)
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('wheel', handleWheel, { passive: true })
@@ -209,11 +228,14 @@ export default function VideoHero() {
     <div ref={containerRef} className="video-scroll-container" id="home">
       <div className="video-sticky">
         {/* Video */}
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <video
           ref={videoRef}
           muted
           playsInline
-          preload="auto"
+          // @ts-expect-error webkit-playsinline needed for older iOS Safari
+          webkit-playsinline=""
+          preload="metadata"
           className="block"
         >
           <source src="/az_video.mp4" type="video/mp4" />
