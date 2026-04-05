@@ -12,6 +12,13 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    setOpen(false)
+  }
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-xl border-b border-white/8">
       <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex items-center justify-between h-14">
@@ -28,6 +35,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-[13px] text-white/50 hover:text-white transition-colors duration-200 no-underline tracking-wide"
             >
               {link.label}
@@ -58,7 +66,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm text-white/70 no-underline py-2 border-b border-white/8 last:border-b-0"
             >
               {link.label}

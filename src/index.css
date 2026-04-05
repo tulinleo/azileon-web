@@ -27,7 +27,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* smooth scroll only for anchor navigation, not during video section */
 }
 
 body {
