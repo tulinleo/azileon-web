@@ -13,16 +13,30 @@ export default function App() {
   useScrollRevealAll()
 
   return (
-    <main>
-      <Navbar />
-      <VideoHero />
-      <Projects />
-      <Clients />
-      <WhyUs />
-      <Process />
-      <Team />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <div className="grain-overlay" />
+      <div className="ambient-blobs">
+        <div className="ambient-blob ambient-blob-1" />
+        <div className="ambient-blob ambient-blob-2" />
+        <div className="ambient-blob ambient-blob-3" />
+      </div>
+
+      <main>
+        <Navbar />
+        <VideoHero />
+        <Projects />
+        <div className="section-divider" />
+        <Clients />
+        <div className="section-divider" />
+        <WhyUs />
+        <div className="section-divider" />
+        <Process />
+        <div className="section-divider" />
+        <Team />
+        <div className="section-divider" />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   )
 }

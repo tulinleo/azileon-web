@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Large video assets
-*.mp4
+# Claude Code
+.claude/
+
+# Root video duplicate
+/az_video.mp4

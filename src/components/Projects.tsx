@@ -33,6 +33,7 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects" className="glass-section py-24 md:py-32 px-6">
+      <div className="section-glow glow-tr" />
       <div className="max-w-5xl mx-auto">
         <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-3 font-medium font-mono">
           Selected work

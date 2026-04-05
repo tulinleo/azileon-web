@@ -20,6 +20,7 @@ const members = [
 export default function Team() {
   return (
     <section id="team" className="glass-section py-24 md:py-32 px-6">
+      <div className="section-glow glow-c" />
       <div className="max-w-4xl mx-auto">
         <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-3 font-medium font-mono">
           The team

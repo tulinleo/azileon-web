@@ -29,10 +29,23 @@ const services = [
   },
 ]
 
+// Auto-scroll speed: pixels per frame at 60fps
+const AUTO_SCROLL_SPEED = 12
+
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
+
+  // Auto-scroll state
+  const autoScrolling = useRef(false)
+  const autoScrollDir = useRef<'down' | 'up'>('down')
+  const autoScrollRaf = useRef<number>(0)
+  const triggeredDown = useRef(false)
+  const triggeredUp = useRef(false)
+  const lastWheelTime = useRef(0)
+  const lastProgress = useRef(0)
+  const scrollStartTime = useRef(0)
 
   useEffect(() => {
     const video = videoRef.current
@@ -41,20 +54,125 @@ export default function VideoHero() {
 
     let rafId: number
 
+    // Core scroll → video sync
+    const syncVideo = () => {
+      const rect = container.getBoundingClientRect()
+      const scrollHeight = container.offsetHeight - window.innerHeight
+      const scrolled = -rect.top
+      const p = Math.min(Math.max(scrolled / scrollHeight, 0), 1)
+
+      setProgress(p)
+
+      if (video.duration && video.readyState >= 2) {
+        video.currentTime = p * video.duration
+      }
+
+      return p
+    }
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId)
       rafId = requestAnimationFrame(() => {
+        const p = syncVideo()
+        const prev = lastProgress.current
+        lastProgress.current = p
+
+        const scrollingUp = p < prev - 0.005
+        const now = performance.now()
+
+        // Track when user first enters the zone
+        if (p > 0.02 && p < 0.98 && scrollStartTime.current === 0) {
+          scrollStartTime.current = now
+        }
+        if (p <= 0.01 || p >= 0.99) {
+          scrollStartTime.current = 0
+        }
+
+        // Require 300ms of scrolling + past 4% threshold before triggering
+        const hasScrolledEnough = now - scrollStartTime.current > 300
+
+        // Trigger auto-scroll DOWN
+        if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
+          triggeredDown.current = true
+          triggeredUp.current = false
+          startAutoScroll('down')
+        }
+
+        // Trigger auto-scroll UP
+        if (scrollingUp && p > 0.02 && p < 0.92 && !triggeredUp.current && !autoScrolling.current && hasScrolledEnough) {
+          triggeredUp.current = true
+          triggeredDown.current = false
+          startAutoScroll('up')
+        }
+
+        // Reset triggers at edges
+        if (p <= 0.01) {
+          triggeredDown.current = false
+          triggeredUp.current = false
+        }
+        if (p >= 0.99) {
+          triggeredDown.current = false
+          triggeredUp.current = false
+        }
+      })
+    }
+
+    // Smooth auto-scroll using rAF — supports both directions
+    const startAutoScroll = (dir: 'down' | 'up') => {
+      cancelAnimationFrame(autoScrollRaf.current)
+      autoScrolling.current = true
+      autoScrollDir.current = dir
+      let lastTime = performance.now()
+
+      const tick = (now: number) => {
+        const delta = now - lastTime
+        lastTime = now
+
         const rect = container.getBoundingClientRect()
         const scrollHeight = container.offsetHeight - window.innerHeight
         const scrolled = -rect.top
-        const p = Math.min(Math.max(scrolled / scrollHeight, 0), 1)
+        const currentP = scrolled / scrollHeight
 
-        setProgress(p)
+        const speed = AUTO_SCROLL_SPEED * (delta / 16.67)
 
-        if (video.duration && video.readyState >= 2) {
-          video.currentTime = p * video.duration
+        if (dir === 'down') {
+          if (currentP >= 0.99) {
+            autoScrolling.current = false
+            return
+          }
+          window.scrollBy(0, speed)
+        } else {
+          if (currentP <= 0.01) {
+            autoScrolling.current = false
+            return
+          }
+          window.scrollBy(0, -speed)
         }
-      })
+
+        autoScrollRaf.current = requestAnimationFrame(tick)
+      }
+
+      autoScrollRaf.current = requestAnimationFrame(tick)
+    }
+
+    const handleWheel = () => {
+      lastWheelTime.current = performance.now()
+    }
+
+    // Stop auto-scroll on explicit navigation (link clicks, refresh, hash change)
+    const stopAutoScroll = () => {
+      cancelAnimationFrame(autoScrollRaf.current)
+      autoScrolling.current = false
+      triggeredDown.current = false
+      triggeredUp.current = false
+      scrollStartTime.current = 0
+    }
+
+    const handleNavClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a, button')
+      if (target && autoScrolling.current) {
+        stopAutoScroll()
+      }
     }
 
     video.addEventListener('loadedmetadata', () => {
@@ -62,11 +180,24 @@ export default function VideoHero() {
     })
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('wheel', handleWheel, { passive: true })
+    window.addEventListener('touchmove', handleWheel, { passive: true })
+    document.addEventListener('click', handleNavClick, true)
+    window.addEventListener('hashchange', stopAutoScroll)
+    document.addEventListener('visibilitychange', stopAutoScroll)
+    window.addEventListener('beforeunload', stopAutoScroll)
     handleScroll()
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('touchmove', handleWheel)
+      document.removeEventListener('click', handleNavClick, true)
+      window.removeEventListener('hashchange', stopAutoScroll)
+      document.removeEventListener('visibilitychange', stopAutoScroll)
+      window.removeEventListener('beforeunload', stopAutoScroll)
       cancelAnimationFrame(rafId)
+      cancelAnimationFrame(autoScrollRaf.current)
     }
   }, [])
 
@@ -88,7 +219,7 @@ export default function VideoHero() {
           <source src="/az_video.mp4" type="video/mp4" />
         </video>
 
-        {/* Persistent dark overlay — always visible, intensifies on scroll */}
+        {/* Persistent dark overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: `rgba(6,5,3,${overlayOpacity})` }}
@@ -102,7 +233,7 @@ export default function VideoHero() {
           }}
         />
 
-        {/* Bottom gradient for seamless transition to dark sections */}
+        {/* Bottom gradient for seamless transition */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -134,29 +265,30 @@ export default function VideoHero() {
 
         {/* ─── Layer 2: "What we do" glass overlay ─── */}
         <div
-          className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none"
+          className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none overflow-y-auto"
           style={{ opacity: servicesOpacity }}
         >
-          <div className="w-full max-w-3xl px-6 md:px-16 lg:px-24 pointer-events-auto" id="services">
-            <div className="glass-panel p-8 md:p-12">
-              <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-3 font-medium font-mono">
+          <div className="w-full max-w-3xl px-4 md:px-16 lg:px-24 py-16 md:py-0 pointer-events-auto" id="services">
+            <div className="glass-panel p-5 md:p-12">
+              <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-[var(--color-accent)] mb-2 md:mb-4 font-semibold font-mono">
                 What we do
               </p>
-              <h2 className="font-serif text-3xl md:text-4xl text-white tracking-tight leading-[1.1] mb-10">
+              <h2 className="font-serif text-3xl md:text-6xl text-white tracking-tight leading-[1.05] mb-5 md:mb-10">
                 Focused expertise for<br />specialized hardware
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-5">
                 {services.map((s) => (
                   <div
                     key={s.title}
-                    className="group rounded-xl bg-white/5 border border-white/8 p-6 hover:bg-white/8 transition-colors duration-300"
+                    className="group rounded-xl bg-white/5 border border-white/8 p-3 md:p-6 hover:bg-white/8 transition-colors duration-300"
                   >
-                    <s.icon size={22} weight="bold" className="text-[var(--color-accent)] mb-3" />
-                    <h3 className="text-sm font-semibold text-white mb-1.5">
+                    <s.icon size={18} className="md:hidden text-[var(--color-accent)] mb-2" weight="bold" />
+                    <s.icon size={22} className="hidden md:block text-[var(--color-accent)] mb-3" weight="bold" />
+                    <h3 className="text-xs md:text-sm font-semibold text-white mb-1 md:mb-1.5">
                       {s.title}
                     </h3>
-                    <p className="text-[13px] text-white/50 leading-relaxed">
+                    <p className="text-[11px] md:text-[13px] text-white/50 leading-relaxed">
                       {s.desc}
                     </p>
                   </div>
