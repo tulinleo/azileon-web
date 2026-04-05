@@ -30,7 +30,7 @@ const services = [
 ]
 
 // Auto-scroll speed: pixels per frame at 60fps
-const AUTO_SCROLL_SPEED = 12
+const AUTO_SCROLL_SPEED = 15
 
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -290,7 +290,7 @@ export default function VideoHero() {
           style={{ opacity: servicesOpacity }}
         >
           <div className="w-full max-w-3xl px-4 md:px-16 lg:px-24 py-16 md:py-0 pointer-events-auto" id="services">
-            <div className="glass-panel p-5 md:p-12">
+            <div className="glass-panel glass-panel-mobile p-5 md:p-12">
               <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-[var(--color-accent)] mb-2 md:mb-4 font-semibold font-mono">
                 What we do
               </p>
@@ -302,14 +302,14 @@ export default function VideoHero() {
                 {services.map((s) => (
                   <div
                     key={s.title}
-                    className="group rounded-xl bg-white/5 border border-white/8 p-3 md:p-6 hover:bg-white/8 transition-colors duration-300"
+                    className="group rounded-xl bg-white/5 border border-white/10 p-3 md:p-6 hover:bg-white/8 transition-colors duration-300"
                   >
                     <s.icon size={18} className="md:hidden text-[var(--color-accent)] mb-2" weight="bold" />
                     <s.icon size={22} className="hidden md:block text-[var(--color-accent)] mb-3" weight="bold" />
                     <h3 className="text-xs md:text-sm font-semibold text-white mb-1 md:mb-1.5">
                       {s.title}
                     </h3>
-                    <p className="text-[11px] md:text-[13px] text-white/50 leading-relaxed">
+                    <p className="text-[11px] md:text-[13px] text-white/70 leading-relaxed">
                       {s.desc}
                     </p>
                   </div>

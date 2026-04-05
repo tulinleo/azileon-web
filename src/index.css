@@ -89,6 +89,13 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 16px;
 }
 
+/* Stronger glass on mobile for readability */
+@media (max-width: 767px) {
+  .glass-panel-mobile {
+    background: rgba(10, 8, 6, 0.75);
+  }
+}
+
 /* ─── Glass card (warm dark, for content sections) ─── */
 .glass-card {
   background: var(--color-bg-card);
