@@ -27,7 +27,7 @@
 }
 
 html {
-  /* smooth scroll only for anchor navigation, not during video section */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -55,26 +55,36 @@ h1, h2, h3, h4, h5, h6 {
 .video-scroll-container {
   position: relative;
   height: 500vh;
-  -webkit-overflow-scrolling: touch;
 }
 
 .video-sticky {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .video-sticky video {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  .video-scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  .video-sticky {
+    height: 100vh;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  .video-sticky video {
+    position: absolute;
+    inset: 0;
+  }
 }
 
 /* ─── Glass panel (dark, over video) ─── */

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Cpu,
   CloudArrowUp,
@@ -35,15 +35,10 @@ const AUTO_SCROLL_SPEED = 12
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const heroLayerRef = useRef<HTMLDivElement>(null)
-  const servicesLayerRef = useRef<HTMLDivElement>(null)
-  const overlayRef = useRef<HTMLDivElement>(null)
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null)
-
-  // Detect touch device (no auto-scroll on mobile — fights native iOS scrolling)
-  const isTouchDevice = useRef(false)
+  const [progress, setProgress] = useState(0)
 
   // Auto-scroll state
+  const isTouchDevice = useRef(false)
   const autoScrolling = useRef(false)
   const autoScrollDir = useRef<'down' | 'up'>('down')
   const autoScrollRaf = useRef<number>(0)
@@ -58,31 +53,23 @@ export default function VideoHero() {
     const container = containerRef.current
     if (!video || !container) return
 
-    // Detect touch device
+    // Detect touch device — disable auto-scroll on mobile (fights iOS native scrolling)
     isTouchDevice.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
     let rafId: number
 
-    // Core scroll → video sync (direct DOM manipulation, no React re-renders)
+    // Core scroll → video sync
     const syncVideo = () => {
       const rect = container.getBoundingClientRect()
       const scrollHeight = container.offsetHeight - window.innerHeight
       const scrolled = -rect.top
       const p = Math.min(Math.max(scrolled / scrollHeight, 0), 1)
 
+      setProgress(p)
+
       if (video.duration && video.readyState >= 2) {
         video.currentTime = p * video.duration
       }
-
-      // Direct DOM updates — avoids React re-render per frame
-      const heroOp = Math.max(1 - p * 3.3, 0)
-      const servicesOp = Math.min(Math.max((p - 0.4) / 0.3, 0), 1)
-      const overlayOp = 0.15 + p * 0.1
-
-      if (heroLayerRef.current) heroLayerRef.current.style.opacity = String(heroOp)
-      if (servicesLayerRef.current) servicesLayerRef.current.style.opacity = String(servicesOp)
-      if (overlayRef.current) overlayRef.current.style.background = `rgba(6,5,3,${overlayOp})`
-      if (scrollIndicatorRef.current) scrollIndicatorRef.current.style.opacity = String(heroOp)
 
       return p
     }
@@ -108,7 +95,7 @@ export default function VideoHero() {
         // Require 300ms of scrolling + past 4% threshold before triggering
         const hasScrolledEnough = now - scrollStartTime.current > 300
 
-        // Auto-scroll only on non-touch devices (fights native iOS scrolling)
+        // Auto-scroll only on non-touch devices
         if (!isTouchDevice.current) {
           // Trigger auto-scroll DOWN
           if (p > 0.04 && !scrollingUp && !triggeredDown.current && !autoScrolling.current && hasScrolledEnough) {
@@ -231,6 +218,10 @@ export default function VideoHero() {
     }
   }, [])
 
+  const heroOpacity = Math.max(1 - progress * 3.3, 0)
+  const servicesOpacity = Math.min(Math.max((progress - 0.4) / 0.3, 0), 1)
+  const overlayOpacity = 0.15 + progress * 0.1
+
   return (
     <div ref={containerRef} className="video-scroll-container" id="home">
       <div className="video-sticky">
@@ -239,8 +230,6 @@ export default function VideoHero() {
           ref={videoRef}
           muted
           playsInline
-          // @ts-ignore webkit-playsinline needed for older iOS Safari
-          webkit-playsinline=""
           preload="auto"
           className="block"
         >
@@ -249,9 +238,8 @@ export default function VideoHero() {
 
         {/* Persistent dark overlay */}
         <div
-          ref={overlayRef}
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'rgba(6,5,3,0.15)' }}
+          style={{ background: `rgba(6,5,3,${overlayOpacity})` }}
         />
 
         {/* Left-side gradient for hero text readability */}
@@ -272,9 +260,8 @@ export default function VideoHero() {
 
         {/* ─── Layer 1: Hero text ─── */}
         <div
-          ref={heroLayerRef}
           className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none"
-          style={{ opacity: 1 }}
+          style={{ opacity: heroOpacity }}
         >
           <div className="px-6 md:px-16 lg:px-24 max-w-3xl pointer-events-auto">
             <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-4 font-medium font-mono">
@@ -295,9 +282,8 @@ export default function VideoHero() {
 
         {/* ─── Layer 2: "What we do" glass overlay ─── */}
         <div
-          ref={servicesLayerRef}
           className="hero-text-layer absolute inset-0 flex items-center justify-start pointer-events-none overflow-y-auto"
-          style={{ opacity: 0 }}
+          style={{ opacity: servicesOpacity }}
         >
           <div className="w-full max-w-3xl px-4 md:px-16 lg:px-24 py-16 md:py-0 pointer-events-auto" id="services">
             <div className="glass-panel glass-panel-mobile p-5 md:p-12">
@@ -331,9 +317,8 @@ export default function VideoHero() {
 
         {/* Scroll indicator */}
         <div
-          ref={scrollIndicatorRef}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-          style={{ opacity: 1 }}
+          style={{ opacity: heroOpacity }}
         >
           <span className="text-[11px] text-white/40 tracking-[0.15em] uppercase font-mono">
             Scroll
