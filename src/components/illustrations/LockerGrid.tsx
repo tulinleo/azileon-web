@@ -5,9 +5,8 @@ export default function LockerGrid() {
   const cellH = 44
   const gap = 4
 
-  // Each locker gets a random delay for its door open/close cycle
-  // One door every ~2s, randomized order
-  const doorDelays = [0, 6, 2, 10, 4, 14, 8, 18, 12, 22, 16, 20]
+  // One door every ~2s, starting at 5s after page load
+  const doorDelays = [5, 11, 7, 15, 9, 19, 13, 23, 17, 27, 21, 25]
 
   const cells = []
   for (let r = 0; r < rows; r++) {
@@ -18,6 +17,10 @@ export default function LockerGrid() {
       const drawDelay = 0.4 + idx * 0.08
       const doorDelay = doorDelays[idx]
 
+      // Door's right edge x position (for transform-origin)
+      const doorX = x + 2
+      const doorRightEdge = doorX + (cellW - 4)
+
       cells.push(
         <g key={`${r}-${c}`}>
           {/* Locker frame */}
@@ -26,19 +29,22 @@ export default function LockerGrid() {
             className="kiosk-draw"
             style={{ strokeDasharray: (cellW + cellH) * 2, strokeDashoffset: (cellW + cellH) * 2, animationDelay: `${drawDelay}s` }}
           />
-          {/* Small handle dot */}
+          {/* Handle dot — left center */}
           <circle
-            cx={x + cellW / 2} cy={y + cellH - 10} r={1.5}
+            cx={x + 6} cy={y + cellH / 2} r={1.5}
             fill="var(--color-border-hover)"
             className="kiosk-dot"
             style={{ animationDelay: `${drawDelay + 0.3}s` }}
           />
-          {/* Door opening — a rect that scales from bottom, simulating door swing */}
+          {/* Door — opens right to left, origin at THIS locker's right edge */}
           <rect
-            x={x + 2} y={y + 2} width={cellW - 4} height={cellH - 4} rx={3}
+            x={doorX} y={y + 2} width={cellW - 4} height={cellH - 4} rx={3}
             fill="var(--color-border-hover)"
             className="locker-door"
-            style={{ animationDelay: `${doorDelay}s` }}
+            style={{
+              animationDelay: `${doorDelay}s`,
+              transformOrigin: `${doorRightEdge}px ${y + cellH / 2}px`,
+            }}
           />
         </g>
       )
