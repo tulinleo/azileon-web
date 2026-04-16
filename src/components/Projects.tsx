@@ -34,7 +34,7 @@ const projects = [
 export default function Projects() {
   return (
     <AnimatedSection id="projects">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto bg-[#F0EDE8] rounded-3xl p-8 md:p-12 lg:p-16">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Selected work
         </p>

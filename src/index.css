@@ -99,3 +99,9 @@ body {
 .hero-delay-2 { animation-delay: 100ms; }
 .hero-delay-3 { animation-delay: 200ms; }
 .hero-delay-4 { animation-delay: 300ms; }
+
+/* Dot grid background */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
