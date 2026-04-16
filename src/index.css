@@ -12,8 +12,8 @@
   --color-text: #1A1A1A;
   --color-text-secondary: #6B6B6B;
   --color-text-muted: #9A9A9A;
-  --color-accent: #D4854A;
-  --color-accent-hover: #C07038;
+  --color-accent: #B86E2F;
+  --color-accent-hover: #9C5B24;
 
   /* Tag colors (light mode) */
   --color-tag-blue-bg: #EBF5FF;
@@ -21,7 +21,7 @@
   --color-tag-green-bg: #EDFBEE;
   --color-tag-green: #2D8A3E;
   --color-tag-amber-bg: #FFF7EB;
-  --color-tag-amber: #B8860B;
+  --color-tag-amber: #8B6508;
 
   /* Animation tokens */
   --animation-duration: 700ms;
@@ -31,6 +31,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  .hero-animate { animation: none; opacity: 1; }
 }
 
 body {
@@ -46,7 +53,7 @@ body {
 }
 
 ::selection {
-  background: rgba(212, 133, 74, 0.25);
+  background: rgba(184, 110, 47, 0.25);
   color: #1A1A1A;
 }
 

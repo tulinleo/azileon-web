@@ -52,6 +52,7 @@ export default function Navbar() {
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 text-[var(--color-text)] bg-transparent border-none cursor-pointer"
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           {open ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
         </button>
