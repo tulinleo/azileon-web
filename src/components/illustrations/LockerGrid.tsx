@@ -6,7 +6,7 @@ export default function LockerGrid() {
   const gap = 4
 
   // Each locker gets a random delay for its door open/close cycle
-  const doorDelays = [2.1, 5.3, 1.0, 7.2, 3.8, 0.5, 6.1, 4.4, 8.0, 2.7, 5.9, 3.2]
+  const doorDelays = [3, 14, 1, 19, 8, 22, 11, 17, 5, 24, 9, 16]
 
   const cells = []
   for (let r = 0; r < rows; r++) {

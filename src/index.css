@@ -238,13 +238,15 @@ body {
 
 /* Locker door open/close */
 @keyframes locker-open-close {
-  0%, 85%, 100% { opacity: 0; }
-  90%, 95% { opacity: 0.15; }
+  0%, 90%, 100% { opacity: 0; transform: scaleY(1); }
+  93% { opacity: 0.5; transform: scaleY(0.3); transform-origin: bottom; }
+  97% { opacity: 0.4; transform: scaleY(0.3); transform-origin: bottom; }
 }
 
 .locker-door {
   opacity: 0;
-  animation: locker-open-close 10s ease-in-out infinite;
+  transform-origin: bottom;
+  animation: locker-open-close 25s ease-in-out infinite;
 }
 
 /* Dot grid background */
