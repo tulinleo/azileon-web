@@ -4,7 +4,7 @@ export default function TeamRobots() {
       viewBox="0 0 240 150"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 top-6 w-[300px] opacity-100 pointer-events-none"
+      className="hidden md:block absolute right-6 top-6 w-[300px] opacity-100 pointer-events-none"
       aria-hidden="true"
     >
       {/* Robot 1 — left */}

@@ -43,7 +43,7 @@ export default function Contact() {
           <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1]">
             Let's talk
           </h2>
-          <div className="relative w-[120px] h-[120px] shrink-0">
+          <div className="hidden md:block relative w-[120px] h-[120px] shrink-0">
             <MailRobot />
           </div>
         </div>

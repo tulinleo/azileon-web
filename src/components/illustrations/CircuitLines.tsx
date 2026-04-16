@@ -5,7 +5,7 @@ export default function CircuitLines({ side = 'left' }: { side?: 'left' | 'right
         viewBox="0 0 200 500"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute -right-6 top-0 h-full w-auto opacity-30 pointer-events-none"
+        className="hidden md:block absolute -right-6 top-0 h-full w-auto opacity-30 pointer-events-none"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
@@ -49,7 +49,7 @@ export default function CircuitLines({ side = 'left' }: { side?: 'left' | 'right
       viewBox="0 0 200 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute -left-6 top-0 h-full w-auto opacity-30 pointer-events-none"
+      className="hidden md:block absolute -left-6 top-0 h-full w-auto opacity-30 pointer-events-none"
       preserveAspectRatio="none"
       aria-hidden="true"
     >

@@ -37,7 +37,7 @@ export default function MailRobot() {
 
 export function MailEnvelope() {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden">
       <svg
         viewBox="0 0 30 20"
         fill="none"

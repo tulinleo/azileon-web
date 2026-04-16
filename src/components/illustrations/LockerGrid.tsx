@@ -91,7 +91,7 @@ export default function LockerGrid() {
       viewBox={`-4 -4 ${totalW + 8} ${totalH + 8}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 top-8 w-[260px] opacity-75 pointer-events-none"
+      className="hidden md:block absolute right-6 top-8 w-[260px] opacity-75 pointer-events-none"
       aria-hidden="true"
     >
       {cells}
