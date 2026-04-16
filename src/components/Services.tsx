@@ -29,7 +29,7 @@ export default function Services() {
   return (
     <AnimatedSection id="services">
       <div className="max-w-6xl mx-auto">
-        <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
+        <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           What we do
         </p>
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">

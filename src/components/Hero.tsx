@@ -5,7 +5,7 @@ export default function Hero() {
     <section id="home" className="min-h-[90vh] flex items-center px-6 pt-16">
       <div className="max-w-6xl mx-auto w-full">
         <div className="max-w-2xl">
-          <p className="hero-animate hero-delay-1 text-xs tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4 font-medium">
+          <p className="hero-animate hero-delay-1 text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4 font-medium">
             Prague-based engineering team
           </p>
           <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-4xl md:text-6xl lg:text-[5rem] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6">
