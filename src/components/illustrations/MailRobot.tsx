@@ -49,9 +49,9 @@ export function MailEnvelope() {
         className="mail-envelope absolute w-[28px]"
       >
         <rect x="1" y="1" width="28" height="18" rx="3"
-          stroke="var(--color-accent)" strokeWidth="1.5" fill="var(--color-bg)" />
+          stroke="var(--color-border-hover)" strokeWidth="1.5" fill="var(--color-bg)" />
         <path d="M3 3 L15 12 L27 3"
-          stroke="var(--color-accent)" strokeWidth="1" fill="none" />
+          stroke="var(--color-border-hover)" strokeWidth="1" fill="none" />
       </svg>
     </div>
   )
