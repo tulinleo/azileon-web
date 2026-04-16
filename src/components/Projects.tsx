@@ -2,48 +2,51 @@ import { ArrowUpRight } from '@phosphor-icons/react'
 import AnimatedSection from './AnimatedSection'
 import LockerGrid from './illustrations/LockerGrid'
 import CircuitLines from './illustrations/CircuitLines'
-
-const projects = [
-  {
-    title: 'Payment terminal & parcel locker platform',
-    client: 'Payment4U a.s.',
-    clientUrl: 'https://payment4u.eu',
-    desc: 'Development of software for cash and cashless payment terminals and automated parcel locker systems. Full-stack platform handling device communication, payment processing and operator management.',
-    tag: 'Fintech',
-    tagBg: 'var(--color-tag-blue-bg)',
-    tagColor: 'var(--color-tag-blue)',
-  },
-  {
-    title: 'BLE asset tracking system',
-    client: 'Alvla s.r.o.',
-    clientUrl: 'https://alvla.eu',
-    desc: 'Design and implementation of a Bluetooth Low Energy tracking system for indoor asset management. Real-time positioning, geofencing and analytics dashboard.',
-    tag: 'IoT',
-    tagBg: 'var(--color-tag-green-bg)',
-    tagColor: 'var(--color-tag-green)',
-  },
-  {
-    title: 'Self-service device software',
-    client: 'Payment4U a.s.',
-    clientUrl: 'https://payment4u.eu',
-    desc: 'Continuous development and feature expansion for a range of self-service devices. Modular architecture enabling rapid deployment of new device types.',
-    tag: 'Hardware',
-    tagBg: 'var(--color-tag-amber-bg)',
-    tagColor: 'var(--color-tag-amber)',
-  },
-]
+import { useT } from '../i18n'
 
 export default function Projects() {
+  const t = useT()
+
+  const projects = [
+    {
+      title: t('projPaymentTitle'),
+      client: 'Payment4U a.s.',
+      clientUrl: 'https://payment4u.eu',
+      desc: t('projPaymentDesc'),
+      tag: t('tagFintech'),
+      tagBg: 'var(--color-tag-blue-bg)',
+      tagColor: 'var(--color-tag-blue)',
+    },
+    {
+      title: t('projBleTitle'),
+      client: 'Alvla s.r.o.',
+      clientUrl: 'https://alvla.eu',
+      desc: t('projBleDesc'),
+      tag: t('tagIot'),
+      tagBg: 'var(--color-tag-green-bg)',
+      tagColor: 'var(--color-tag-green)',
+    },
+    {
+      title: t('projSelfServiceTitle'),
+      client: 'Payment4U a.s.',
+      clientUrl: 'https://payment4u.eu',
+      desc: t('projSelfServiceDesc'),
+      tag: t('tagHardware'),
+      tagBg: 'var(--color-tag-amber-bg)',
+      tagColor: 'var(--color-tag-amber)',
+    },
+  ]
+
   return (
     <AnimatedSection id="projects">
       <CircuitLines side="right" />
       <div className="max-w-6xl mx-auto bg-[var(--color-bg-warm)] rounded-3xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
         <LockerGrid />
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-          Selected work
+          {t('projectsLabel')}
         </p>
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">
-          Projects that shipped
+          {t('projectsTitle')}
         </h2>
 
         <div className="flex flex-col border-t border-[var(--color-border)]">

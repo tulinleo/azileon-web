@@ -4,10 +4,12 @@ import AnimatedSection from './AnimatedSection'
 import Button from './Button'
 import MailRobot, { MailEnvelope } from './illustrations/MailRobot'
 import CircuitLines from './illustrations/CircuitLines'
+import { useT } from '../i18n'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const t = useT()
 
   useEffect(() => {
     return () => {
@@ -24,7 +26,7 @@ export default function Contact() {
     const email = data.get('email')
     const message = data.get('message')
 
-    window.location.href = `mailto:info@azileon.cz?subject=Inquiry from ${name}${company ? ` (${company})` : ''}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\n${message}`)}`
+    window.location.href = `mailto:info@azileon.cz?subject=${t('mailSubjectPrefix')} ${name}${company ? ` (${company})` : ''}&body=${encodeURIComponent(`${t('mailFrom')}: ${name}\nEmail: ${email}\n${t('mailCompany')}: ${company || t('mailNa')}\n\n${message}`)}`
     setSubmitted(true)
     resetTimerRef.current = setTimeout(() => setSubmitted(false), 3000)
   }
@@ -37,18 +39,18 @@ export default function Contact() {
       <MailEnvelope />
       <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-          Contact
+          {t('contactLabel')}
         </p>
         <div className="flex items-center gap-4 mb-4">
           <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1]">
-            Let's talk
+            {t('contactTitle')}
           </h2>
           <div className="hidden md:block relative w-[120px] h-[120px] shrink-0">
             <MailRobot />
           </div>
         </div>
         <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-12 text-base">
-          Tell us about your terminals, lockers or self-service devices and we will get back to you within one business day.
+          {t('contactBody')}
         </p>
 
         <div className="fade-in stagger-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-8 md:p-12">
@@ -60,7 +62,7 @@ export default function Contact() {
                   <Envelope size={18} weight="bold" className="text-[var(--color-accent)]" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">Email</p>
+                  <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">{t('contactEmail')}</p>
                   <a
                     href="mailto:info@azileon.cz"
                     className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200 no-underline"
@@ -74,8 +76,8 @@ export default function Contact() {
                   <MapPin size={18} weight="bold" className="text-[var(--color-accent)]" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">Location</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]">Prague, Czech Republic</p>
+                  <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">{t('contactLocation')}</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">{t('contactLocationValue')}</p>
                 </div>
               </div>
             </div>
@@ -84,32 +86,32 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="name" className="text-sm font-medium text-[var(--color-text)]">Name</label>
-                  <input id="name" name="name" type="text" required className={inputClass} placeholder="Your name" />
+                  <label htmlFor="name" className="text-sm font-medium text-[var(--color-text)]">{t('formName')}</label>
+                  <input id="name" name="name" type="text" required className={inputClass} placeholder={t('formNamePlaceholder')} />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="company" className="text-sm font-medium text-[var(--color-text)]">Company</label>
-                  <input id="company" name="company" type="text" className={inputClass} placeholder="Your company" />
+                  <label htmlFor="company" className="text-sm font-medium text-[var(--color-text)]">{t('formCompany')}</label>
+                  <input id="company" name="company" type="text" className={inputClass} placeholder={t('formCompanyPlaceholder')} />
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="email" className="text-sm font-medium text-[var(--color-text)]">Email</label>
-                <input id="email" name="email" type="email" required className={inputClass} placeholder="you@company.com" />
+                <label htmlFor="email" className="text-sm font-medium text-[var(--color-text)]">{t('formEmail')}</label>
+                <input id="email" name="email" type="email" required className={inputClass} placeholder={t('formEmailPlaceholder')} />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="message" className="text-sm font-medium text-[var(--color-text)]">Message</label>
+                <label htmlFor="message" className="text-sm font-medium text-[var(--color-text)]">{t('formMessage')}</label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
                   className={`${inputClass} resize-vertical font-[inherit]`}
-                  placeholder="Tell us about your project"
+                  placeholder={t('formMessagePlaceholder')}
                 />
               </div>
               <div className="self-start">
                 <Button type="submit">
-                  {submitted ? 'Opening email client...' : 'Send message'}
+                  {submitted ? t('formSubmitted') : t('formSubmit')}
                 </Button>
               </div>
             </form>

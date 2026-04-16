@@ -2,41 +2,44 @@ import { Cpu, CloudArrowUp, Rocket, Wrench } from '@phosphor-icons/react'
 import AnimatedSection from './AnimatedSection'
 import Card from './Card'
 import CircuitLines from './illustrations/CircuitLines'
-
-const featured = {
-  icon: Cpu,
-  title: 'Embedded & device software',
-  desc: 'Business logic and control software for payment terminals, parcel lockers and custom self-service devices.',
-}
-
-const rest = [
-  {
-    icon: CloudArrowUp,
-    title: 'Backend & integrations',
-    desc: 'APIs, payment gateway integrations, ERP/WMS connections and remote monitoring dashboards.',
-  },
-  {
-    icon: Rocket,
-    title: 'Prototyping & MVPs',
-    desc: 'Rapid prototypes and pilot projects delivered in weeks, not months.',
-  },
-  {
-    icon: Wrench,
-    title: 'Long-term support',
-    desc: 'Ongoing feature development, maintenance and SLA-based support.',
-  },
-]
+import { useT } from '../i18n'
 
 export default function Services() {
+  const t = useT()
+
+  const featured = {
+    icon: Cpu,
+    title: t('svcEmbeddedTitle'),
+    desc: t('svcEmbeddedDesc'),
+  }
+
+  const rest = [
+    {
+      icon: CloudArrowUp,
+      title: t('svcBackendTitle'),
+      desc: t('svcBackendDesc'),
+    },
+    {
+      icon: Rocket,
+      title: t('svcPrototypingTitle'),
+      desc: t('svcPrototypingDesc'),
+    },
+    {
+      icon: Wrench,
+      title: t('svcSupportTitle'),
+      desc: t('svcSupportDesc'),
+    },
+  ]
+
   return (
     <AnimatedSection id="services">
       <CircuitLines />
       <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-          What we do
+          {t('servicesLabel')}
         </p>
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">
-          Focused expertise for<br />specialized hardware
+          {t('servicesTitle').split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}
         </h2>
 
         {/* Featured card — full width */}

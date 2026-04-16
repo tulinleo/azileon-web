@@ -1,23 +1,34 @@
 import { useState, useEffect } from 'react'
 import { List, X } from '@phosphor-icons/react'
 import Button from './Button'
-
-const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#team', label: 'Team' },
-  { href: '#contact', label: 'Contact' },
-]
+import { useT, useLang } from '../i18n'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const t = useT()
+  const { lang, setLang } = useLang()
+
+  const links = [
+    { href: '#services', label: t('navServices') },
+    { href: '#projects', label: t('navProjects') },
+    { href: '#team', label: t('navTeam') },
+    { href: '#contact', label: t('navContact') },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const LangToggle = () => (
+    <div className="flex items-center gap-1 text-sm">
+      <button onClick={() => setLang('en')} className={`px-1.5 py-0.5 rounded ${lang === 'en' ? 'text-[var(--color-accent)] font-semibold' : 'text-[var(--color-text-muted)]'} bg-transparent border-none cursor-pointer`}>EN</button>
+      <span className="text-[var(--color-border)]">|</span>
+      <button onClick={() => setLang('cs')} className={`px-1.5 py-0.5 rounded ${lang === 'cs' ? 'text-[var(--color-accent)] font-semibold' : 'text-[var(--color-text-muted)]'} bg-transparent border-none cursor-pointer`}>CZ</button>
+    </div>
+  )
 
   return (
     <nav
@@ -44,14 +55,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <Button href="#contact">Get in touch</Button>
+          <LangToggle />
+          <Button href="#contact">{t('navCta')}</Button>
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 text-[var(--color-text)] bg-transparent border-none cursor-pointer"
-          aria-label="Toggle menu"
+          aria-label={t('toggleMenu')}
           aria-expanded={open}
           aria-controls="mobile-nav"
         >
@@ -72,8 +84,9 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <div className="mt-3">
-            <Button href="#contact">Get in touch</Button>
+          <div className="mt-3 flex items-center gap-4">
+            <LangToggle />
+            <Button href="#contact">{t('navCta')}</Button>
           </div>
         </div>
       )}

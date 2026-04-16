@@ -3,38 +3,41 @@ import AnimatedSection from './AnimatedSection'
 import Card from './Card'
 import TeamRobots from './illustrations/TeamRobots'
 import CircuitLines from './illustrations/CircuitLines'
-
-const members = [
-  {
-    name: 'Yehor Zhyliaiev',
-    role: 'Co-founder / Software Architect',
-    initials: 'YZ',
-    email: 'yz@azileon.cz',
-    linkedin: 'https://www.linkedin.com/in/yzazileon',
-  },
-  {
-    name: 'Leonid Tulin',
-    role: 'Co-founder / Project Lead',
-    initials: 'LT',
-    email: 'tulin@azileon.cz',
-    linkedin: 'https://www.linkedin.com/in/leonidtulin',
-  },
-]
+import { useT } from '../i18n'
 
 export default function Team() {
+  const t = useT()
+
+  const members = [
+    {
+      name: 'Yehor Zhyliaiev',
+      role: t('roleYehor'),
+      initials: 'YZ',
+      email: 'yz@azileon.cz',
+      linkedin: 'https://www.linkedin.com/in/yzazileon',
+    },
+    {
+      name: 'Leonid Tulin',
+      role: t('roleLeonid'),
+      initials: 'LT',
+      email: 'tulin@azileon.cz',
+      linkedin: 'https://www.linkedin.com/in/leonidtulin',
+    },
+  ]
+
   return (
     <AnimatedSection id="team">
       <CircuitLines side="left" />
       <TeamRobots />
       <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-          The team
+          {t('teamLabel')}
         </p>
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-6">
-          Who we are
+          {t('teamTitle')}
         </h2>
         <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[55ch] mb-12 text-base">
-          A small, senior team with hands-on experience in embedded software, IoT systems and custom hardware integration. We treat your product as our own.
+          {t('teamBody')}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -57,14 +60,14 @@ export default function Team() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-lg bg-[var(--color-bg)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200"
-                  aria-label={`${m.name} on LinkedIn`}
+                  aria-label={`${m.name} ${t('onLinkedin')}`}
                 >
                   <LinkedinLogo size={18} weight="bold" />
                 </a>
                 <a
                   href={`mailto:${m.email}`}
                   className="w-9 h-9 rounded-lg bg-[var(--color-bg)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200"
-                  aria-label={`Email ${m.name}`}
+                  aria-label={`${t('emailPerson')} ${m.name}`}
                 >
                   <Envelope size={18} weight="bold" />
                 </a>

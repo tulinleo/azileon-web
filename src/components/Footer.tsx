@@ -1,6 +1,9 @@
 import { LinkedinLogo } from '@phosphor-icons/react'
+import { useT } from '../i18n'
 
 export default function Footer() {
+  const t = useT()
+
   return (
     <footer className="border-t border-[var(--color-border)] py-12 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -8,15 +11,14 @@ export default function Footer() {
           <span className="font-[var(--font-heading)] text-xl font-semibold text-[var(--color-text)]">
             Azileon
           </span>
-          <p className="text-sm text-[var(--color-text-secondary)] mt-2 leading-relaxed">
-            Software for terminals, lockers<br />
-            & self-service devices
+          <p className="text-sm text-[var(--color-text-secondary)] mt-2 leading-relaxed whitespace-pre-line">
+            {t('footerTagline')}
           </p>
         </div>
 
         <div>
           <p className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-            Email
+            {t('footerEmail')}
           </p>
           <div className="flex flex-col gap-1.5">
             <a href="mailto:info@azileon.cz" className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] no-underline transition-colors duration-200">
@@ -33,7 +35,7 @@ export default function Footer() {
 
         <div>
           <p className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
-            Connect
+            {t('footerConnect')}
           </p>
           <div className="flex flex-col gap-2.5">
             <a
@@ -60,7 +62,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto mt-12 pt-6 border-t border-[var(--color-border)]">
         <p className="text-xs text-[var(--color-text-muted)]">
-          &copy; {new Date().getFullYear()} Azileon. All rights reserved.
+          &copy; {new Date().getFullYear()} Azileon. {t('footerRights')}
         </p>
       </div>
     </footer>
