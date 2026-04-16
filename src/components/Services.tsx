@@ -1,6 +1,7 @@
 import { Cpu, CloudArrowUp, Rocket, Wrench } from '@phosphor-icons/react'
 import AnimatedSection from './AnimatedSection'
 import Card from './Card'
+import CircuitLines from './illustrations/CircuitLines'
 
 const featured = {
   icon: Cpu,
@@ -29,7 +30,8 @@ const rest = [
 export default function Services() {
   return (
     <AnimatedSection id="services">
-      <div className="max-w-6xl mx-auto">
+      <CircuitLines />
+      <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           What we do
         </p>

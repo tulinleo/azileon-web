@@ -1,52 +1,53 @@
 export default function CircuitLines() {
   return (
     <svg
-      viewBox="0 0 120 400"
+      viewBox="0 0 200 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute left-0 top-1/2 -translate-y-1/2 h-[70%] w-auto opacity-50 pointer-events-none"
+      className="absolute -left-6 top-0 h-full w-auto opacity-30 pointer-events-none"
+      preserveAspectRatio="none"
     >
-      {/* Vertical main line — flowing dashes */}
-      <line x1="40" y1="0" x2="40" y2="400"
+      {/* Main vertical trunk — starts from top edge, ends at bottom edge */}
+      <line x1="30" y1="0" x2="30" y2="500"
         className="circuit-line-flow"
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" />
 
-      {/* Branch 1 */}
-      <path d="M40 60 L80 60 L80 100"
+      {/* Branch 1 — goes right, starts from left edge */}
+      <path d="M0 80 L30 80 L80 80 L80 130"
         className="circuit-line-flow" style={{ animationDelay: '0.2s' }}
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="80" cy="100" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0s' }} />
+      <circle cx="80" cy="130" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0s' }} />
 
-      {/* Branch 2 */}
-      <path d="M40 140 L70 140"
+      {/* Branch 2 — starts from left edge */}
+      <path d="M0 180 L30 180 L60 180"
         className="circuit-line-flow" style={{ animationDelay: '0.4s' }}
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="70" cy="140" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.5s' }} />
+      <circle cx="60" cy="180" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.5s' }} />
 
-      {/* Branch 3 */}
-      <path d="M40 200 L90 200 L90 240 L110 240"
+      {/* Branch 3 — longer, starts from left edge */}
+      <path d="M0 260 L30 260 L100 260 L100 300 L140 300"
         className="circuit-line-flow" style={{ animationDelay: '0.6s' }}
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="110" cy="240" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.0s' }} />
+      <circle cx="140" cy="300" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.0s' }} />
 
-      {/* Branch 4 */}
-      <path d="M40 300 L60 300 L60 330"
+      {/* Branch 4 — starts from left edge */}
+      <path d="M0 370 L30 370 L55 370 L55 400"
         className="circuit-line-flow" style={{ animationDelay: '0.8s' }}
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="60" cy="330" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.5s' }} />
+      <circle cx="55" cy="400" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.5s' }} />
 
-      {/* Branch 5 */}
-      <path d="M40 360 L100 360"
+      {/* Branch 5 — starts from left edge */}
+      <path d="M0 450 L30 450 L120 450"
         className="circuit-line-flow" style={{ animationDelay: '1.0s' }}
         stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="100" cy="360" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '2.0s' }} />
+      <circle cx="120" cy="450" r="4" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '2.0s' }} />
 
-      {/* Junction dots on main line */}
-      <circle cx="40" cy="60" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.3s' }} />
-      <circle cx="40" cy="140" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.8s' }} />
-      <circle cx="40" cy="200" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.3s' }} />
-      <circle cx="40" cy="300" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.8s' }} />
-      <circle cx="40" cy="360" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '2.3s' }} />
+      {/* Junction dots on main trunk */}
+      <circle cx="30" cy="80" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.3s' }} />
+      <circle cx="30" cy="180" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '0.8s' }} />
+      <circle cx="30" cy="260" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.3s' }} />
+      <circle cx="30" cy="370" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.8s' }} />
+      <circle cx="30" cy="450" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '2.3s' }} />
     </svg>
   )
 }
