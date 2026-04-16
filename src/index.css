@@ -44,6 +44,7 @@ html {
   .robot-wave-1, .robot-wave-2 { animation: none; stroke-dashoffset: 0; }
   .robot-signal { animation: none; stroke-dashoffset: 0; opacity: 0.5; }
   .kiosk-float { animation: none; }
+  .kiosk-float-delayed { animation: none; opacity: 0.7; }
   .circuit-dot-pulse { animation: none; }
   .circuit-line-flow { animation: none; stroke-dasharray: none; }
 }
@@ -207,6 +208,11 @@ body {
 
 .kiosk-float {
   animation: float-gentle 3s ease-in-out infinite;
+}
+
+.kiosk-float-delayed {
+  opacity: 0;
+  animation: hero-fade-up var(--animation-duration) var(--animation-easing) forwards 0.2s, float-gentle 3s ease-in-out infinite 1s;
 }
 
 /* Dot grid background */

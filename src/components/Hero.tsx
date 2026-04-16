@@ -23,7 +23,7 @@ export default function Hero() {
         </div>
 
         {/* Kiosk illustration — desktop only */}
-        <div className="hidden md:block hero-animate hero-delay-3 shrink-0 opacity-70 kiosk-float">
+        <div className="hidden md:block shrink-0 opacity-70 kiosk-float-delayed">
           <KioskIllustration />
         </div>
       </div>
