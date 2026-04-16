@@ -59,7 +59,7 @@ export default function Projects() {
                   href={p.clientUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors duration-200 no-underline"
+                  className="flex items-center gap-1.5 text-[18px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200 no-underline"
                 >
                   {p.client}
                   <ArrowUpRight size={14} weight="bold" />
