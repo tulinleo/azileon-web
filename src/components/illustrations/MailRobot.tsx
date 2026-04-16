@@ -4,7 +4,7 @@ export default function MailRobot() {
       viewBox="0 0 200 180"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 bottom-12 w-[160px] opacity-40 pointer-events-none"
+      className="absolute right-6 bottom-12 w-[220px] opacity-40 pointer-events-none kiosk-float"
     >
       {/* Robot body */}
       <rect x="20" y="60" width="60" height="50" rx="8"
