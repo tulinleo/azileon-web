@@ -5,6 +5,7 @@ export default function KioskIllustration() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full max-w-[320px] max-h-[400px]"
+      aria-hidden="true"
     >
       {/* Kiosk body */}
       <rect

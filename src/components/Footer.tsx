@@ -60,7 +60,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto mt-12 pt-6 border-t border-[var(--color-border)]">
         <p className="text-xs text-[var(--color-text-muted)]">
-          &copy; 2026 Azileon. All rights reserved.
+          &copy; {new Date().getFullYear()} Azileon. All rights reserved.
         </p>
       </div>
     </footer>

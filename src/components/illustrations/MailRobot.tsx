@@ -1,5 +1,5 @@
-const s = { stroke: '#8A7D72' }
-const f = { fill: '#8A7D72' }
+const s = { stroke: 'var(--color-illustration)' }
+const f = { fill: 'var(--color-illustration)' }
 
 export default function MailRobot() {
   return (
@@ -8,6 +8,7 @@ export default function MailRobot() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full pointer-events-none"
+      aria-hidden="true"
     >
       <rect x="20" y="45" width="60" height="50" rx="8"
         className="kiosk-draw" style={{ ...s, strokeDasharray: 220, strokeDashoffset: 220, animationDelay: '0.3s' }} />
@@ -42,11 +43,12 @@ export function MailEnvelope() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="mail-envelope absolute w-[28px]"
+        aria-hidden="true"
       >
         <rect x="1" y="1" width="28" height="18" rx="3"
-          style={{ stroke: '#8A7D72' }} strokeWidth="1.5" fill="var(--color-bg)" />
+          style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1.5" fill="var(--color-bg)" />
         <path d="M3 3 L15 12 L27 3"
-          style={{ stroke: '#8A7D72' }} strokeWidth="1" fill="none" />
+          style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1" fill="none" />
       </svg>
     </div>
   )

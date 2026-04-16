@@ -7,6 +7,7 @@ export default function CircuitLines({ side = 'left' }: { side?: 'left' | 'right
         xmlns="http://www.w3.org/2000/svg"
         className="absolute -right-6 top-0 h-full w-auto opacity-30 pointer-events-none"
         preserveAspectRatio="none"
+        aria-hidden="true"
       >
         {/* Main vertical trunk — edge to edge vertically */}
         <line x1="170" y1="0" x2="170" y2="500"
@@ -50,6 +51,7 @@ export default function CircuitLines({ side = 'left' }: { side?: 'left' | 'right
       xmlns="http://www.w3.org/2000/svg"
       className="absolute -left-6 top-0 h-full w-auto opacity-30 pointer-events-none"
       preserveAspectRatio="none"
+      aria-hidden="true"
     >
       {/* Main vertical trunk — edge to edge vertically */}
       <line x1="30" y1="0" x2="30" y2="500"

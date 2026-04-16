@@ -40,7 +40,7 @@ export default function Services() {
         </h2>
 
         {/* Featured card — full width */}
-        <Card className="fade-in stagger-1 p-8 md:p-10 mb-5">
+        <Card className="fade-in stagger-2 p-8 md:p-10 mb-5">
           <featured.icon size={32} className="text-[var(--color-accent)] mb-4" weight="bold" />
           <h3 className="font-[var(--font-heading)] text-lg md:text-xl font-medium text-[var(--color-text)] mb-2">
             {featured.title}
@@ -53,7 +53,7 @@ export default function Services() {
         {/* Remaining 3 cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {rest.map((s, i) => (
-            <Card key={s.title} className={`fade-in stagger-${i + 2} p-6 md:p-8`}>
+            <Card key={s.title} className={`fade-in stagger-${i + 3} p-6 md:p-8`}>
               <s.icon size={24} className="text-[var(--color-accent)] mb-4" weight="bold" />
               <h3 className="font-[var(--font-heading)] text-base font-medium text-[var(--color-text)] mb-2">
                 {s.title}

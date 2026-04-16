@@ -1,5 +1,5 @@
 import { Envelope, MapPin } from '@phosphor-icons/react'
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useEffect, useRef, useState } from 'react'
 import AnimatedSection from './AnimatedSection'
 import Button from './Button'
 import MailRobot, { MailEnvelope } from './illustrations/MailRobot'
@@ -7,6 +7,13 @@ import CircuitLines from './illustrations/CircuitLines'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current !== null) clearTimeout(resetTimerRef.current)
+    }
+  }, [])
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -19,10 +26,10 @@ export default function Contact() {
 
     window.location.href = `mailto:info@azileon.cz?subject=Inquiry from ${name}${company ? ` (${company})` : ''}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\n${message}`)}`
     setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
+    resetTimerRef.current = setTimeout(() => setSubmitted(false), 3000)
   }
 
-  const inputClass = 'border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-surface)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 placeholder:text-[var(--color-text-muted)]'
+  const inputClass = 'border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-surface)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-1 transition-colors duration-200 placeholder:text-[var(--color-text-muted)]'
 
   return (
     <AnimatedSection id="contact">

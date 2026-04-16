@@ -5,6 +5,7 @@ export default function TeamRobots() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="absolute right-6 top-6 w-[300px] opacity-100 pointer-events-none"
+      aria-hidden="true"
     >
       {/* Robot 1 — left */}
       <rect x="15" y="50" width="50" height="42" rx="7"

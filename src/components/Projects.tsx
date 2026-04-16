@@ -37,7 +37,7 @@ export default function Projects() {
   return (
     <AnimatedSection id="projects">
       <CircuitLines side="right" />
-      <div className="max-w-6xl mx-auto bg-[#F0EDE8] rounded-3xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto bg-[var(--color-bg-warm)] rounded-3xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
         <LockerGrid />
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Selected work

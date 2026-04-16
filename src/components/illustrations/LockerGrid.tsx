@@ -11,6 +11,7 @@ export default function LockerGrid() {
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>
+    let innerTimeout: ReturnType<typeof setTimeout> | undefined
     let lastIdx = -1
 
     const openRandom = () => {
@@ -26,7 +27,7 @@ export default function LockerGrid() {
         // Open
         door.style.transform = 'scaleX(0.15)'
         // Close after 1.5s
-        setTimeout(() => {
+        innerTimeout = setTimeout(() => {
           door.style.transform = 'scaleX(1)'
         }, 1500)
       }
@@ -38,7 +39,10 @@ export default function LockerGrid() {
     // Start after 1s
     timeout = setTimeout(openRandom, 1000)
 
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(timeout)
+      if (innerTimeout !== undefined) clearTimeout(innerTimeout)
+    }
   }, [total])
 
   const cells = []
@@ -88,6 +92,7 @@ export default function LockerGrid() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="absolute right-6 top-8 w-[260px] opacity-75 pointer-events-none"
+      aria-hidden="true"
     >
       {cells}
     </svg>

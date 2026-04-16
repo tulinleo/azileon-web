@@ -23,6 +23,10 @@
   --color-tag-amber-bg: #FFF7EB;
   --color-tag-amber: #8B6508;
 
+  /* Illustration tokens */
+  --color-bg-warm: #F0EDE8;
+  --color-illustration: #8A7D72;
+
   /* Animation tokens */
   --animation-duration: 700ms;
   --animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
@@ -149,13 +153,8 @@ body {
 
 .kiosk-cursor {
   fill: var(--color-accent);
-  animation: kiosk-blink 1s ease-in-out infinite;
-  animation-delay: 1.5s;
-  opacity: 0;
-}
-
-.kiosk-cursor {
   animation: kiosk-fade-in 0.1s ease forwards 1.5s, kiosk-blink 1s ease-in-out infinite 1.6s;
+  opacity: 0;
 }
 
 /* Looping animations for illustrations */

@@ -53,6 +53,7 @@ export default function Navbar() {
           className="md:hidden p-2 text-[var(--color-text)] bg-transparent border-none cursor-pointer"
           aria-label="Toggle menu"
           aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
         </button>
@@ -60,7 +61,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)] px-6 py-5 flex flex-col gap-1">
+        <div id="mobile-nav" className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)] px-6 py-5 flex flex-col gap-1">
           {links.map((link) => (
             <a
               key={link.href}
