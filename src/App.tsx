@@ -1,4 +1,4 @@
-import { useScrollRevealAll } from './hooks/useScrollReveal'
+import { useScrollReveal } from './hooks/useScrollReveal'
 import Navbar from './components/Navbar'
 import VideoHero from './components/VideoHero'
 import Projects from './components/Projects'
@@ -10,7 +10,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
-  useScrollRevealAll()
+  useScrollReveal()
 
   return (
     <>
