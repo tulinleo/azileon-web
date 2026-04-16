@@ -1,5 +1,7 @@
 import { Envelope, MapPin } from '@phosphor-icons/react'
 import { type FormEvent, useState } from 'react'
+import AnimatedSection from './AnimatedSection'
+import Button from './Button'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -18,45 +20,46 @@ export default function Contact() {
     setTimeout(() => setSubmitted(false), 3000)
   }
 
-  return (
-    <section id="contact" className="glass-section py-24 md:py-32 px-6">
+  const inputClass = 'border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-surface)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 placeholder:text-[var(--color-text-muted)]'
 
-      <div className="max-w-4xl mx-auto">
-        <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-3 font-medium font-mono">
+  return (
+    <AnimatedSection id="contact">
+      <div className="max-w-6xl mx-auto">
+        <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Contact
         </p>
-        <h2 className="fade-in stagger-1 font-serif text-4xl md:text-5xl tracking-tight leading-[1.1] text-[var(--color-text)] mb-4">
+        <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-4">
           Let's talk
         </h2>
-        <p className="fade-in stagger-2 text-[var(--color-text-muted)] leading-relaxed max-w-[50ch] mb-16 text-[15px]">
+        <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-12 text-[15px]">
           Tell us about your terminals, lockers or self-service devices and we will get back to you within one business day.
         </p>
 
-        <div className="fade-in stagger-3 glass-card p-8 md:p-12">
+        <div className="fade-in stagger-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-8 md:p-12">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-12 md:gap-16">
             {/* Contact info */}
             <div className="flex flex-col gap-6">
               <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-lg bg-[var(--color-bg-raised)] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-[var(--color-bg)] flex items-center justify-center shrink-0">
                   <Envelope size={18} weight="bold" className="text-[var(--color-accent)]" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">Email</p>
                   <a
                     href="mailto:info@azileon.cz"
-                    className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors duration-200 no-underline"
+                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200 no-underline"
                   >
                     info@azileon.cz
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-lg bg-[var(--color-bg-raised)] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-[var(--color-bg)] flex items-center justify-center shrink-0">
                   <MapPin size={18} weight="bold" className="text-[var(--color-accent)]" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[var(--color-text)] mb-0.5">Location</p>
-                  <p className="text-sm text-[var(--color-text-muted)]">Prague, Czech Republic</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">Prague, Czech Republic</p>
                 </div>
               </div>
             </div>
@@ -65,68 +68,38 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="name" className="text-sm font-medium text-[var(--color-text)]">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    className="border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-bg-raised)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 placeholder:text-[var(--color-text-faint)]"
-                    placeholder="Your name"
-                  />
+                  <label htmlFor="name" className="text-sm font-medium text-[var(--color-text)]">Name</label>
+                  <input id="name" name="name" type="text" required className={inputClass} placeholder="Your name" />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="company" className="text-sm font-medium text-[var(--color-text)]">
-                    Company
-                  </label>
-                  <input
-                    id="company"
-                    name="company"
-                    type="text"
-                    className="border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-bg-raised)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 placeholder:text-[var(--color-text-faint)]"
-                    placeholder="Your company"
-                  />
+                  <label htmlFor="company" className="text-sm font-medium text-[var(--color-text)]">Company</label>
+                  <input id="company" name="company" type="text" className={inputClass} placeholder="Your company" />
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="email" className="text-sm font-medium text-[var(--color-text)]">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-bg-raised)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 placeholder:text-[var(--color-text-faint)]"
-                  placeholder="you@company.com"
-                />
+                <label htmlFor="email" className="text-sm font-medium text-[var(--color-text)]">Email</label>
+                <input id="email" name="email" type="email" required className={inputClass} placeholder="you@company.com" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="message" className="text-sm font-medium text-[var(--color-text)]">
-                  Message
-                </label>
+                <label htmlFor="message" className="text-sm font-medium text-[var(--color-text)]">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
-                  className="border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-bg-raised)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] transition-colors duration-200 resize-vertical font-[inherit] placeholder:text-[var(--color-text-faint)]"
+                  className={`${inputClass} resize-vertical font-[inherit]`}
                   placeholder="Tell us about your project"
                 />
               </div>
-              <button
-                type="submit"
-                className="self-start text-sm font-medium px-6 py-2.5 rounded-xl border-none cursor-pointer transition-colors duration-200 active:scale-[0.98]"
-                style={{ background: 'var(--color-accent)', color: 'var(--color-bg)' }}
-              >
-                {submitted ? 'Opening email client...' : 'Send message'}
-              </button>
+              <div className="self-start">
+                <Button type="submit">
+                  {submitted ? 'Opening email client...' : 'Send message'}
+                </Button>
+              </div>
             </form>
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   )
 }
