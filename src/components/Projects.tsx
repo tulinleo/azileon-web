@@ -69,7 +69,7 @@ export default function Projects() {
                 <h3 className="font-[var(--font-heading)] text-xl font-medium text-[var(--color-text)] mb-2 leading-snug">
                   {p.title}
                 </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed text-[15px] max-w-[55ch]">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed text-base max-w-[55ch]">
                   {p.desc}
                 </p>
               </div>

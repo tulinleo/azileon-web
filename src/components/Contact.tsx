@@ -31,7 +31,7 @@ export default function Contact() {
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-4">
           Let's talk
         </h2>
-        <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-12 text-[15px]">
+        <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-12 text-base">
           Tell us about your terminals, lockers or self-service devices and we will get back to you within one business day.
         </p>
 

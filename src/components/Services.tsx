@@ -43,7 +43,7 @@ export default function Services() {
               <h3 className="font-[var(--font-heading)] text-base font-medium text-[var(--color-text)] mb-2">
                 {s.title}
               </h3>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
                 {s.desc}
               </p>
             </Card>

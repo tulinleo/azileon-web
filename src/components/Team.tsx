@@ -29,7 +29,7 @@ export default function Team() {
         <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-6">
           Who we are
         </h2>
-        <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[55ch] mb-12 text-[15px]">
+        <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[55ch] mb-12 text-base">
           A small, senior team with hands-on experience in embedded software, IoT systems and custom hardware integration. We treat your product as our own.
         </p>
 
