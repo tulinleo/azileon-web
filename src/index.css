@@ -48,6 +48,7 @@ html {
   .circuit-dot-pulse { animation: none; }
   .circuit-line-flow { animation: none; stroke-dasharray: none; }
   .circuit-junction { animation: none; }
+  .locker-door { animation: none; opacity: 0; }
 }
 
 body {
@@ -233,6 +234,17 @@ body {
 @keyframes junction-pulse {
   0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
   50% { transform: translate(-50%, -50%) scale(1.8); opacity: 1; }
+}
+
+/* Locker door open/close */
+@keyframes locker-open-close {
+  0%, 85%, 100% { opacity: 0; }
+  90%, 95% { opacity: 0.15; }
+}
+
+.locker-door {
+  opacity: 0;
+  animation: locker-open-close 10s ease-in-out infinite;
 }
 
 /* Dot grid background */

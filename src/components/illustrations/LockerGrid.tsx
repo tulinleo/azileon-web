@@ -4,28 +4,40 @@ export default function LockerGrid() {
   const cellW = 36
   const cellH = 44
   const gap = 4
-  const startX = 0
-  const startY = 0
+
+  // Each locker gets a random delay for its door open/close cycle
+  const doorDelays = [2.1, 5.3, 1.0, 7.2, 3.8, 0.5, 6.1, 4.4, 8.0, 2.7, 5.9, 3.2]
 
   const cells = []
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      const x = startX + c * (cellW + gap)
-      const y = startY + r * (cellH + gap)
-      const delay = 0.4 + (r * cols + c) * 0.08
+      const x = c * (cellW + gap)
+      const y = r * (cellH + gap)
+      const idx = r * cols + c
+      const drawDelay = 0.4 + idx * 0.08
+      const doorDelay = doorDelays[idx]
+
       cells.push(
         <g key={`${r}-${c}`}>
+          {/* Locker frame */}
           <rect
             x={x} y={y} width={cellW} height={cellH} rx={4}
             className="kiosk-draw"
-            style={{ strokeDasharray: (cellW + cellH) * 2, strokeDashoffset: (cellW + cellH) * 2, animationDelay: `${delay}s` }}
+            style={{ strokeDasharray: (cellW + cellH) * 2, strokeDashoffset: (cellW + cellH) * 2, animationDelay: `${drawDelay}s` }}
           />
-          {/* Small handle dot — pulses */}
+          {/* Small handle dot */}
           <circle
-            cx={x + cellW / 2} cy={y + cellH - 10} r={2}
+            cx={x + cellW / 2} cy={y + cellH - 10} r={1.5}
+            fill="var(--color-border-hover)"
+            className="kiosk-dot"
+            style={{ animationDelay: `${drawDelay + 0.3}s` }}
+          />
+          {/* Door opening — a rect that scales from bottom, simulating door swing */}
+          <rect
+            x={x + 2} y={y + 2} width={cellW - 4} height={cellH - 4} rx={3}
             fill="var(--color-accent)"
-            className="circuit-dot-pulse"
-            style={{ animationDelay: `${delay + 0.5}s` }}
+            className="locker-door"
+            style={{ animationDelay: `${doorDelay}s` }}
           />
         </g>
       )
