@@ -1,10 +1,9 @@
 import { useScrollReveal } from './hooks/useScrollReveal'
 import Navbar from './components/Navbar'
-import VideoHero from './components/VideoHero'
+import Hero from './components/Hero'
+import Services from './components/Services'
 import Projects from './components/Projects'
-import Clients from './components/Clients'
-import WhyUs from './components/WhyUs'
-import Process from './components/Process'
+import AccentBand from './components/AccentBand'
 import Team from './components/Team'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -14,22 +13,16 @@ export default function App() {
 
   return (
     <>
+      <Navbar />
       <main>
-        <Navbar />
-        <VideoHero />
+        <Hero />
+        <Services />
         <Projects />
-        <div className="section-divider" />
-        <Clients />
-        <div className="section-divider" />
-        <WhyUs />
-        <div className="section-divider" />
-        <Process />
-        <div className="section-divider" />
+        <AccentBand />
         <Team />
-        <div className="section-divider" />
         <Contact />
-        <Footer />
       </main>
+      <Footer />
     </>
   )
 }
