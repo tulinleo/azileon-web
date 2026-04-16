@@ -2,7 +2,7 @@ import { Envelope, MapPin } from '@phosphor-icons/react'
 import { type FormEvent, useState } from 'react'
 import AnimatedSection from './AnimatedSection'
 import Button from './Button'
-import MailRobot from './illustrations/MailRobot'
+import MailRobot, { MailEnvelope } from './illustrations/MailRobot'
 import CircuitLines from './illustrations/CircuitLines'
 
 export default function Contact() {
@@ -27,14 +27,19 @@ export default function Contact() {
   return (
     <AnimatedSection id="contact">
       <CircuitLines side="right" />
-      <MailRobot />
+      <MailEnvelope />
       <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Contact
         </p>
-        <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-4">
-          Let's talk
-        </h2>
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1]">
+            Let's talk
+          </h2>
+          <div className="relative w-[80px] h-[80px] shrink-0">
+            <MailRobot />
+          </div>
+        </div>
         <p className="fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-12 text-base">
           Tell us about your terminals, lockers or self-service devices and we will get back to you within one business day.
         </p>
