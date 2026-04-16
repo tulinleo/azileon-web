@@ -7,7 +7,7 @@ export default function Hero() {
         <p className="hero-animate hero-delay-1 text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4 font-medium">
           Prague-based engineering team
         </p>
-        <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-6xl md:text-7xl lg:text-[7rem] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6 max-w-4xl">
+        <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-5xl md:text-6xl lg:text-[5.5rem] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6 max-w-4xl">
           Software for terminals, lockers & self-service devices
         </h1>
         <p className="hero-animate hero-delay-3 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-8">
