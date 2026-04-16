@@ -4,7 +4,7 @@ export default function TeamRobots() {
       viewBox="0 0 240 150"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 top-6 w-[200px] opacity-55 pointer-events-none"
+      className="absolute right-6 top-6 w-[300px] opacity-75 pointer-events-none"
     >
       {/* Robot 1 — left */}
       <rect x="15" y="50" width="50" height="42" rx="7"
@@ -49,9 +49,6 @@ export default function TeamRobots() {
       <line x1="178" y1="91" x2="178" y2="112" className="kiosk-draw" style={{ strokeDasharray: 21, strokeDashoffset: 21, animationDelay: '0.75s' }} />
       <line x1="148" y1="112" x2="162" y2="112" className="kiosk-draw" style={{ strokeDasharray: 14, strokeDashoffset: 14, animationDelay: '0.9s' }} />
       <line x1="171" y1="112" x2="185" y2="112" className="kiosk-draw" style={{ strokeDasharray: 14, strokeDashoffset: 14, animationDelay: '0.95s' }} />
-
-      {/* Small heart/star between them */}
-      <circle cx="110" cy="55" r="3" fill="var(--color-accent)" className="circuit-dot-pulse" style={{ animationDelay: '1.5s' }} />
     </svg>
   )
 }
