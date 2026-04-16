@@ -238,17 +238,18 @@ body {
 
 /* Mail envelope: robot → float right → hit right wire → travel up → fade */
 @keyframes mail-travel {
-  0% { left: 330px; top: 160px; opacity: 0; }
-  5% { left: 330px; top: 160px; opacity: 1; }
-  35% { left: calc(100% - 50px); top: 160px; opacity: 1; }
-  45% { left: calc(100% - 50px); top: 120px; opacity: 1; }
-  65% { left: calc(100% - 50px); top: 60px; opacity: 0.5; }
-  80% { left: calc(100% - 50px); top: 0px; opacity: 0; }
-  100% { left: 330px; top: 160px; opacity: 0; }
+  0% { left: 400px; top: 160px; opacity: 0; }
+  3% { left: 400px; top: 160px; opacity: 1; }
+  18% { left: 400px; top: 160px; opacity: 1; }
+  50% { left: calc(100% - 50px); top: 160px; opacity: 1; }
+  58% { left: calc(100% - 50px); top: 120px; opacity: 1; }
+  75% { left: calc(100% - 50px); top: 60px; opacity: 0.5; }
+  88% { left: calc(100% - 50px); top: 0px; opacity: 0; }
+  100% { left: 400px; top: 160px; opacity: 0; }
 }
 
 .mail-envelope {
-  animation: mail-travel 8s ease-in-out infinite 2s;
+  animation: mail-travel 10s ease-in-out infinite 2s;
 }
 
 /* Dot grid background */
