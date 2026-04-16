@@ -48,6 +48,7 @@ html {
   .circuit-dot-pulse { animation: none; }
   .circuit-line-flow { animation: none; stroke-dasharray: none; }
   .circuit-junction { animation: none; }
+  .mail-envelope { animation: none; opacity: 0; }
 }
 
 body {
@@ -233,6 +234,25 @@ body {
 @keyframes junction-pulse {
   0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
   50% { transform: translate(-50%, -50%) scale(1.8); opacity: 1; }
+}
+
+/* Mail envelope traveling along wire */
+@keyframes mail-travel {
+  0% { transform: translate(95px, 72px); opacity: 0; }
+  5% { transform: translate(95px, 72px); opacity: 1; }
+  15% { transform: translate(140px, 72px); }
+  25% { transform: translate(140px, 40px); }
+  40% { transform: translate(200px, 40px); }
+  50% { transform: translate(200px, 60px); }
+  65% { transform: translate(260px, 60px); }
+  75% { transform: translate(260px, 40px); }
+  85% { transform: translate(300px, 40px); opacity: 1; }
+  90% { transform: translate(300px, 40px); opacity: 0; }
+  100% { transform: translate(95px, 72px); opacity: 0; }
+}
+
+.mail-envelope {
+  animation: mail-travel 6s ease-in-out infinite;
 }
 
 /* Dot grid background */
