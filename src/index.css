@@ -38,6 +38,9 @@ html {
   html { scroll-behavior: auto; }
   .fade-in { opacity: 1; transform: none; transition: none; }
   .hero-animate { animation: none; opacity: 1; }
+  .kiosk-draw, .kiosk-draw-thin { stroke-dashoffset: 0; animation: none; }
+  .kiosk-dot { opacity: 1; animation: none; }
+  .kiosk-cursor { animation: none; opacity: 1; }
 }
 
 body {
@@ -99,6 +102,53 @@ body {
 .hero-delay-2 { animation-delay: 100ms; }
 .hero-delay-3 { animation-delay: 200ms; }
 .hero-delay-4 { animation-delay: 300ms; }
+
+/* Kiosk SVG line-draw animation */
+@keyframes kiosk-trace {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes kiosk-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes kiosk-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.kiosk-draw {
+  stroke: var(--color-border-hover);
+  stroke-width: 2;
+  fill: none;
+  animation: kiosk-trace 1s var(--animation-easing) forwards;
+}
+
+.kiosk-draw-thin {
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.5;
+  animation: kiosk-trace 0.6s var(--animation-easing) forwards;
+}
+
+.kiosk-dot {
+  fill: var(--color-border-hover);
+  opacity: 0;
+  animation: kiosk-fade-in 0.3s var(--animation-easing) forwards;
+}
+
+.kiosk-cursor {
+  fill: var(--color-accent);
+  animation: kiosk-blink 1s ease-in-out infinite;
+  animation-delay: 1.5s;
+  opacity: 0;
+}
+
+.kiosk-cursor {
+  animation: kiosk-fade-in 0.1s ease forwards 1.5s, kiosk-blink 1s ease-in-out infinite 1.6s;
+}
 
 /* Dot grid background */
 .dot-grid {
