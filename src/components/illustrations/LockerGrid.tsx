@@ -6,7 +6,8 @@ export default function LockerGrid() {
   const gap = 4
 
   // Each locker gets a random delay for its door open/close cycle
-  const doorDelays = [3, 14, 1, 19, 8, 22, 11, 17, 5, 24, 9, 16]
+  // One door every ~2s, randomized order
+  const doorDelays = [0, 6, 2, 10, 4, 14, 8, 18, 12, 22, 16, 20]
 
   const cells = []
   for (let r = 0; r < rows; r++) {
@@ -35,7 +36,7 @@ export default function LockerGrid() {
           {/* Door opening — a rect that scales from bottom, simulating door swing */}
           <rect
             x={x + 2} y={y + 2} width={cellW - 4} height={cellH - 4} rx={3}
-            fill="var(--color-accent)"
+            fill="var(--color-border-hover)"
             className="locker-door"
             style={{ animationDelay: `${doorDelay}s` }}
           />
@@ -52,7 +53,7 @@ export default function LockerGrid() {
       viewBox={`-4 -4 ${totalW + 8} ${totalH + 8}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 top-8 w-[260px] opacity-50 pointer-events-none"
+      className="absolute right-6 top-8 w-[260px] opacity-75 pointer-events-none"
     >
       {cells}
     </svg>
