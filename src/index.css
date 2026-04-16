@@ -236,23 +236,20 @@ body {
   50% { transform: translate(-50%, -50%) scale(1.8); opacity: 1; }
 }
 
-/* Mail envelope traveling along wire */
+/* Mail envelope: robot → float right → hit right wire → travel up → fade */
 @keyframes mail-travel {
-  0% { transform: translate(95px, 72px); opacity: 0; }
-  5% { transform: translate(95px, 72px); opacity: 1; }
-  15% { transform: translate(140px, 72px); }
-  25% { transform: translate(140px, 40px); }
-  40% { transform: translate(200px, 40px); }
-  50% { transform: translate(200px, 60px); }
-  65% { transform: translate(260px, 60px); }
-  75% { transform: translate(260px, 40px); }
-  85% { transform: translate(300px, 40px); opacity: 1; }
-  90% { transform: translate(300px, 40px); opacity: 0; }
-  100% { transform: translate(95px, 72px); opacity: 0; }
+  0% { left: 110px; bottom: 45%; opacity: 0; }
+  5% { left: 110px; bottom: 45%; opacity: 1; }
+  30% { left: calc(100% - 60px); bottom: 45%; opacity: 1; }
+  35% { left: calc(100% - 60px); bottom: 50%; opacity: 1; }
+  55% { left: calc(100% - 60px); bottom: 65%; opacity: 0.8; }
+  75% { left: calc(100% - 60px); bottom: 80%; opacity: 0.4; }
+  85% { left: calc(100% - 60px); bottom: 90%; opacity: 0; }
+  100% { left: 110px; bottom: 45%; opacity: 0; }
 }
 
 .mail-envelope {
-  animation: mail-travel 6s ease-in-out infinite;
+  animation: mail-travel 8s ease-in-out infinite 2s;
 }
 
 /* Dot grid background */
