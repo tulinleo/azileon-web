@@ -20,11 +20,12 @@ export default function LockerGrid() {
             className="kiosk-draw"
             style={{ strokeDasharray: (cellW + cellH) * 2, strokeDashoffset: (cellW + cellH) * 2, animationDelay: `${delay}s` }}
           />
-          {/* Small handle dot */}
+          {/* Small handle dot — pulses */}
           <circle
             cx={x + cellW / 2} cy={y + cellH - 10} r={2}
-            className="kiosk-dot"
-            style={{ animationDelay: `${delay + 0.3}s` }}
+            fill="var(--color-accent)"
+            className="circuit-dot-pulse"
+            style={{ animationDelay: `${delay + 0.5}s` }}
           />
         </g>
       )
@@ -39,7 +40,7 @@ export default function LockerGrid() {
       viewBox={`-4 -4 ${totalW + 8} ${totalH + 8}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-6 top-8 w-[240px] opacity-35 pointer-events-none"
+      className="absolute right-6 top-8 w-[260px] opacity-50 pointer-events-none"
     >
       {cells}
     </svg>

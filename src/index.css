@@ -44,6 +44,8 @@ html {
   .robot-wave-1, .robot-wave-2 { animation: none; stroke-dashoffset: 0; }
   .robot-signal { animation: none; stroke-dashoffset: 0; opacity: 0.5; }
   .kiosk-float { animation: none; }
+  .circuit-dot-pulse { animation: none; }
+  .circuit-line-flow { animation: none; stroke-dasharray: none; }
 }
 
 body {
@@ -168,6 +170,25 @@ body {
 @keyframes float-gentle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { r: 3; opacity: 0.6; }
+  50% { r: 5; opacity: 1; }
+}
+
+@keyframes trace-flow {
+  0% { stroke-dashoffset: 20; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.circuit-dot-pulse {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+.circuit-line-flow {
+  stroke-dasharray: 10 10;
+  animation: trace-flow 1.5s linear infinite;
 }
 
 .robot-wave-1 {
