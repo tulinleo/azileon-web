@@ -2,6 +2,7 @@ import { Envelope, MapPin } from '@phosphor-icons/react'
 import { type FormEvent, useState } from 'react'
 import AnimatedSection from './AnimatedSection'
 import Button from './Button'
+import MailRobot from './illustrations/MailRobot'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -24,7 +25,8 @@ export default function Contact() {
 
   return (
     <AnimatedSection id="contact">
-      <div className="max-w-6xl mx-auto">
+      <MailRobot />
+      <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Contact
         </p>

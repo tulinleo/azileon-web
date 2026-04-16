@@ -1,6 +1,7 @@
 import { LinkedinLogo, Envelope } from '@phosphor-icons/react'
 import AnimatedSection from './AnimatedSection'
 import Card from './Card'
+import TeamNodes from './illustrations/TeamNodes'
 
 const members = [
   {
@@ -22,7 +23,8 @@ const members = [
 export default function Team() {
   return (
     <AnimatedSection id="team">
-      <div className="max-w-6xl mx-auto">
+      <TeamNodes />
+      <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           The team
         </p>
