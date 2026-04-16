@@ -1,4 +1,5 @@
 import { ArrowUpRight } from '@phosphor-icons/react'
+import AnimatedSection from './AnimatedSection'
 
 const projects = [
   {
@@ -32,17 +33,16 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="glass-section py-24 md:py-32 px-6">
-
-      <div className="max-w-5xl mx-auto">
-        <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-faint)] mb-3 font-medium font-mono">
+    <AnimatedSection id="projects">
+      <div className="max-w-6xl mx-auto">
+        <p className="fade-in text-xs tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           Selected work
         </p>
-        <h2 className="fade-in stagger-1 font-serif text-4xl md:text-5xl tracking-tight leading-[1.1] text-[var(--color-text)] mb-16">
+        <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">
           Projects that shipped
         </h2>
 
-        <div className="flex flex-col gap-0 border-t border-[var(--color-border)]">
+        <div className="flex flex-col border-t border-[var(--color-border)]">
           {projects.map((p, i) => (
             <div
               key={p.title}
@@ -66,10 +66,10 @@ export default function Projects() {
                 </a>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-[var(--color-text)] mb-2 leading-snug">
+                <h3 className="font-[var(--font-heading)] text-xl font-medium text-[var(--color-text)] mb-2 leading-snug">
                   {p.title}
                 </h3>
-                <p className="text-[var(--color-text-muted)] leading-relaxed text-[15px] max-w-[55ch]">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed text-[15px] max-w-[55ch]">
                   {p.desc}
                 </p>
               </div>
@@ -77,6 +77,6 @@ export default function Projects() {
           ))}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   )
 }
