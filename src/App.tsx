@@ -1,5 +1,6 @@
 import { useScrollReveal } from './hooks/useScrollReveal'
 import Navbar from './components/Navbar'
+import CircuitOverlay from './components/CircuitOverlay'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import SectionDivider from './components/SectionDivider'
@@ -13,8 +14,9 @@ export default function App() {
 
   return (
     <>
+      <CircuitOverlay />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <SectionDivider />
         <Services />

@@ -47,6 +47,7 @@ html {
   .kiosk-float-delayed { animation: none; opacity: 0.7; }
   .circuit-dot-pulse { animation: none; }
   .circuit-line-flow { animation: none; stroke-dasharray: none; }
+  .circuit-junction { animation: none; }
 }
 
 body {
@@ -213,6 +214,25 @@ body {
 .kiosk-float-delayed {
   opacity: 0;
   animation: hero-fade-up var(--animation-duration) var(--animation-easing) forwards 0.2s, float-gentle 3s ease-in-out infinite 1s;
+}
+
+/* Full-page circuit overlay */
+.circuit-line-bg {
+  background: var(--color-accent);
+}
+
+.circuit-junction {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%);
+  animation: junction-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes junction-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.8); opacity: 1; }
 }
 
 /* Dot grid background */

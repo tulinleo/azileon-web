@@ -2,7 +2,7 @@ import { LinkedinLogo } from '@phosphor-icons/react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] py-12 px-6">
+    <footer className="border-t border-[var(--color-border)] py-12 px-6 relative z-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
         <div>
           <span className="font-[var(--font-heading)] text-xl font-semibold text-[var(--color-text)]">
