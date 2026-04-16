@@ -238,14 +238,14 @@ body {
 
 /* Mail envelope: robot → float right → hit right wire → travel up → fade */
 @keyframes mail-travel {
-  0% { left: 110px; bottom: 45%; opacity: 0; }
-  5% { left: 110px; bottom: 45%; opacity: 1; }
-  30% { left: calc(100% - 60px); bottom: 45%; opacity: 1; }
-  35% { left: calc(100% - 60px); bottom: 50%; opacity: 1; }
-  55% { left: calc(100% - 60px); bottom: 65%; opacity: 0.8; }
-  75% { left: calc(100% - 60px); bottom: 80%; opacity: 0.4; }
-  85% { left: calc(100% - 60px); bottom: 90%; opacity: 0; }
-  100% { left: 110px; bottom: 45%; opacity: 0; }
+  0% { right: 30px; top: 110px; opacity: 0; }
+  5% { right: 30px; top: 110px; opacity: 1; }
+  25% { right: 30px; top: 130px; opacity: 1; }
+  35% { right: calc(0px); top: 130px; opacity: 1; }
+  50% { right: calc(0px); top: 80px; opacity: 0.8; }
+  70% { right: calc(0px); top: 30px; opacity: 0.4; }
+  80% { right: calc(0px); top: 0px; opacity: 0; }
+  100% { right: 30px; top: 110px; opacity: 0; }
 }
 
 .mail-envelope {
