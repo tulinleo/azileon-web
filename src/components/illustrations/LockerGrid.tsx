@@ -5,8 +5,8 @@ export default function LockerGrid() {
   const cellH = 44
   const gap = 4
 
-  // One door every ~2s, starting at 5s after page load
-  const doorDelays = [5, 11, 7, 15, 9, 19, 13, 23, 17, 27, 21, 25]
+  // Staggered start delays — first door at 1s, then every 2s apart
+  const doorDelays = [1, 7, 3, 11, 5, 15, 9, 19, 13, 23, 17, 21]
 
   const cells = []
   for (let r = 0; r < rows; r++) {
