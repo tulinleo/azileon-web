@@ -14,11 +14,17 @@ export function useScrollReveal() {
       { threshold: 0.1 }
     )
 
-    const elements = document.querySelectorAll('.fade-in')
-    for (const el of elements) {
-      observer.observe(el)
-    }
+    // Wait one frame so all children are in the DOM
+    const raf = requestAnimationFrame(() => {
+      const elements = document.querySelectorAll('.fade-in')
+      for (const el of elements) {
+        observer.observe(el)
+      }
+    })
 
-    return () => observer.disconnect()
+    return () => {
+      cancelAnimationFrame(raf)
+      observer.disconnect()
+    }
   }, [])
 }

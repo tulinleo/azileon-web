@@ -6,9 +6,10 @@ type ButtonProps = {
   href?: string
   type?: 'button' | 'submit'
   onClick?: () => void
+  className?: string
 }
 
-export default function Button({ children, variant = 'primary', href, type = 'button', onClick }: ButtonProps) {
+export default function Button({ children, variant = 'primary', href, type = 'button', onClick, className: extraClass = '' }: ButtonProps) {
   const base = 'inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer group'
 
   const variants = {
@@ -16,7 +17,7 @@ export default function Button({ children, variant = 'primary', href, type = 'bu
     secondary: 'bg-transparent text-[var(--color-text)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] active:scale-[0.98]',
   }
 
-  const className = `${base} ${variants[variant]}`
+  const className = `${base} ${variants[variant]} ${extraClass}`
 
   if (href) {
     return (
