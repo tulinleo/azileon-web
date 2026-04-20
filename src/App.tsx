@@ -1,4 +1,5 @@
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { useLang } from './i18n'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
@@ -9,7 +10,8 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
-  useScrollReveal()
+  const { lang } = useLang()
+  useScrollReveal(lang)
 
   return (
     <>

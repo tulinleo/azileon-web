@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export function useScrollReveal() {
+export function useScrollReveal(lang?: string) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -14,10 +14,10 @@ export function useScrollReveal() {
       { threshold: 0.1 }
     )
 
-    // Wait one frame so all children are in the DOM
     const raf = requestAnimationFrame(() => {
       const elements = document.querySelectorAll('.fade-in')
       for (const el of elements) {
+        if (el.classList.contains('visible')) continue
         observer.observe(el)
       }
     })
@@ -26,5 +26,5 @@ export function useScrollReveal() {
       cancelAnimationFrame(raf)
       observer.disconnect()
     }
-  }, [])
+  }, [lang])
 }
