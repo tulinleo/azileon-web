@@ -41,7 +41,7 @@ export default function Services() {
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           {t('servicesLabel')}
         </p>
-        <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">
+        <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[clamp(2rem,3.5vw,3rem)] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] mb-12">
           {t('servicesTitle').split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}
         </h2>
 

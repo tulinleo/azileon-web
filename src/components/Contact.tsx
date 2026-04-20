@@ -41,8 +41,8 @@ export default function Contact() {
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           {t('contactLabel')}
         </p>
-        <div className="flex items-center gap-4 mb-4">
-          <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[3rem] font-medium text-[var(--color-text)] tracking-tight leading-[1.1]">
+        <div className="flex items-center gap-4 mb-4 flex-wrap">
+          <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[clamp(2rem,3.5vw,3rem)] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] min-w-0">
             {t('contactTitle')}
           </h2>
           <div className="hidden md:block relative w-[120px] h-[120px] shrink-0">
