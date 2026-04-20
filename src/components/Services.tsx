@@ -15,16 +15,19 @@ export default function Services() {
 
   const rest = [
     {
+      key: 'backend',
       icon: CloudArrowUp,
       title: t('svcBackendTitle'),
       desc: t('svcBackendDesc'),
     },
     {
+      key: 'prototyping',
       icon: Rocket,
       title: t('svcPrototypingTitle'),
       desc: t('svcPrototypingDesc'),
     },
     {
+      key: 'support',
       icon: Wrench,
       title: t('svcSupportTitle'),
       desc: t('svcSupportDesc'),
@@ -56,7 +59,7 @@ export default function Services() {
         {/* Remaining 3 cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {rest.map((s, i) => (
-            <Card key={s.title} className={`fade-in stagger-${i + 3} p-6 md:p-8`}>
+            <Card key={s.key} className={`fade-in stagger-${i + 3} p-6 md:p-8`}>
               <s.icon size={24} className="text-[var(--color-accent)] mb-4" weight="bold" />
               <h3 className="font-[var(--font-heading)] text-base font-medium text-[var(--color-text)] mb-2">
                 {s.title}

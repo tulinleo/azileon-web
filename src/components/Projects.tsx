@@ -9,6 +9,7 @@ export default function Projects() {
 
   const projects = [
     {
+      key: 'payment',
       title: t('projPaymentTitle'),
       client: 'Payment4U a.s.',
       clientUrl: 'https://payment4u.eu',
@@ -18,6 +19,7 @@ export default function Projects() {
       tagColor: 'var(--color-tag-blue)',
     },
     {
+      key: 'ble',
       title: t('projBleTitle'),
       client: 'Alvla s.r.o.',
       clientUrl: 'https://alvla.eu',
@@ -27,6 +29,7 @@ export default function Projects() {
       tagColor: 'var(--color-tag-green)',
     },
     {
+      key: 'selfservice',
       title: t('projSelfServiceTitle'),
       client: 'Payment4U a.s.',
       clientUrl: 'https://payment4u.eu',
@@ -52,7 +55,7 @@ export default function Projects() {
         <div className="flex flex-col border-t border-[var(--color-border)]">
           {projects.map((p, i) => (
             <div
-              key={p.title}
+              key={p.key}
               className={`fade-in stagger-${i + 1} group py-8 md:py-10 border-b border-[var(--color-border)] grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 md:gap-12`}
             >
               <div>
