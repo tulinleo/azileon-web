@@ -12,7 +12,7 @@ export default function Hero() {
           <p className="hero-animate hero-delay-1 text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4 font-medium">
             {t('heroLabel')}
           </p>
-          <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-5xl md:text-6xl lg:text-[5.5rem] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6">
+          <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-[clamp(2.5rem,5vw_+_1rem,5.5rem)] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6">
             {t('heroTitle')}
           </h1>
           <p className="hero-animate hero-delay-3 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-8">
