@@ -29,7 +29,7 @@ export default function Team() {
     <AnimatedSection id="team">
       <CircuitLines side="left" />
       <TeamRobots />
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-6xl mx-auto relative lg:pr-[340px]">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           {t('teamLabel')}
         </p>
