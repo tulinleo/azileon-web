@@ -1,3 +1,5 @@
+import { forwardRef } from 'react'
+
 const s = { stroke: 'var(--color-illustration)' }
 const f = { fill: 'var(--color-illustration)' }
 
@@ -35,21 +37,23 @@ export default function MailRobot() {
   )
 }
 
-export function MailEnvelope() {
-  return (
-    <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden">
-      <svg
-        viewBox="0 0 30 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="mail-envelope absolute w-[28px]"
-        aria-hidden="true"
-      >
-        <rect x="1" y="1" width="28" height="18" rx="3"
-          style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1.5" fill="var(--color-bg)" />
-        <path d="M3 3 L15 12 L27 3"
-          style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1" fill="none" />
-      </svg>
-    </div>
-  )
-}
+export const MailEnvelope = forwardRef<HTMLDivElement>(
+  function MailEnvelope(_props, ref) {
+    return (
+      <div ref={ref} className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden">
+        <svg
+          viewBox="0 0 30 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="mail-envelope absolute w-[28px]"
+          aria-hidden="true"
+        >
+          <rect x="1" y="1" width="28" height="18" rx="3"
+            style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1.5" fill="var(--color-bg)" />
+          <path d="M3 3 L15 12 L27 3"
+            style={{ stroke: 'var(--color-illustration)' }} strokeWidth="1" fill="none" />
+        </svg>
+      </div>
+    )
+  }
+)

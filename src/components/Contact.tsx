@@ -1,5 +1,5 @@
 import { Envelope, MapPin } from '@phosphor-icons/react'
-import { type FormEvent, useEffect, useRef, useState } from 'react'
+import { type FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import AnimatedSection from './AnimatedSection'
 import Button from './Button'
 import MailRobot, { MailEnvelope } from './illustrations/MailRobot'
@@ -9,13 +9,38 @@ import { useT } from '../i18n'
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const robotRef = useRef<HTMLDivElement>(null)
+  const envelopeRef = useRef<HTMLDivElement>(null)
   const t = useT()
 
+  const updateEnvelopePos = useCallback(() => {
+    const section = sectionRef.current
+    const robot = robotRef.current
+    const envelope = envelopeRef.current
+    if (!section || !robot || !envelope) return
+    const sRect = section.getBoundingClientRect()
+    const rRect = robot.getBoundingClientRect()
+    const x = rRect.right - sRect.left + 4
+    const y = rRect.top - sRect.top + rRect.height * 0.35
+    envelope.style.setProperty('--envelope-x', `${x}px`)
+    envelope.style.setProperty('--envelope-y', `${y}px`)
+  }, [])
+
   useEffect(() => {
+    updateEnvelopePos()
+    window.addEventListener('resize', updateEnvelopePos)
     return () => {
+      window.removeEventListener('resize', updateEnvelopePos)
       if (resetTimerRef.current !== null) clearTimeout(resetTimerRef.current)
     }
-  }, [])
+  }, [updateEnvelopePos])
+
+  // Re-measure when language changes (heading length affects robot position)
+  const contactTitle = t('contactTitle')
+  useEffect(() => {
+    requestAnimationFrame(updateEnvelopePos)
+  }, [contactTitle, updateEnvelopePos])
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,9 +59,9 @@ export default function Contact() {
   const inputClass = 'border border-[var(--color-border)] rounded-xl px-4 py-2.5 text-sm bg-[var(--color-surface)] text-[var(--color-text)] outline-none focus:border-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-1 transition-colors duration-200 placeholder:text-[var(--color-text-muted)]'
 
   return (
-    <AnimatedSection id="contact">
+    <AnimatedSection id="contact" ref={sectionRef}>
       <CircuitLines side="right" />
-      <MailEnvelope />
+      <MailEnvelope ref={envelopeRef} />
       <div className="max-w-6xl mx-auto relative">
         <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">
           {t('contactLabel')}
@@ -45,7 +70,7 @@ export default function Contact() {
           <h2 className="fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[clamp(2rem,3.5vw,3rem)] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] min-w-0">
             {t('contactTitle')}
           </h2>
-          <div className="hidden md:block relative w-[120px] h-[120px] shrink-0">
+          <div ref={robotRef} className="hidden md:block relative w-[120px] h-[120px] shrink-0">
             <MailRobot />
           </div>
         </div>

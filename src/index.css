@@ -241,14 +241,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Mail envelope: robot → float right → hit right wire → travel up → fade */
 @keyframes mail-travel {
-  0%   { left: 35%; top: 10rem; opacity: 0; }
-  3%   { left: 35%; top: 10rem; opacity: 1; }
-  18%  { left: 35%; top: 10rem; opacity: 1; }
-  50%  { left: calc(100% - 3rem); top: 10rem; opacity: 1; }
+  0%   { left: var(--envelope-x, 35%); top: var(--envelope-y, 10rem); opacity: 0; }
+  3%   { left: var(--envelope-x, 35%); top: var(--envelope-y, 10rem); opacity: 1; }
+  18%  { left: var(--envelope-x, 35%); top: var(--envelope-y, 10rem); opacity: 1; }
+  50%  { left: calc(100% - 3rem); top: var(--envelope-y, 10rem); opacity: 1; }
   58%  { left: calc(100% - 3rem); top: 7rem; opacity: 1; }
   75%  { left: calc(100% - 3rem); top: 3rem; opacity: 0.5; }
   88%  { left: calc(100% - 3rem); top: 0; opacity: 0; }
-  100% { left: 35%; top: 10rem; opacity: 0; }
+  100% { left: var(--envelope-x, 35%); top: var(--envelope-y, 10rem); opacity: 0; }
 }
 
 .mail-envelope {
