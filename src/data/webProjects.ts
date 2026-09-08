@@ -1,4 +1,5 @@
 import type { TKey } from '../i18n'
+import { asset } from '../lib/asset'
 
 export type WebProject = {
   key: string
@@ -24,7 +25,7 @@ export const webProjects: WebProject[] = [
     client: 'Hroda Law',
     clientUrl: 'https://legalwaw.com/',
     tech: 'WordPress · Polylang · Google Places',
-    image: '/projects/web/legalwaw.webp',
+    image: asset('/projects/web/legalwaw.webp'),
   },
   {
     key: 'alvibco',
@@ -33,7 +34,7 @@ export const webProjects: WebProject[] = [
     client: 'Alvib Sistemas',
     clientUrl: 'https://alvibco.com/',
     tech: 'WordPress · Localization · hreflang',
-    image: '/projects/web/alvibco.webp',
+    image: asset('/projects/web/alvibco.webp'),
   },
   {
     key: 'alvla',
@@ -42,7 +43,7 @@ export const webProjects: WebProject[] = [
     client: 'Alvla',
     clientUrl: 'https://alvla.eu/',
     tech: 'WooCommerce · ACF · GitLab CI',
-    image: '/projects/web/alvla.webp',
+    image: asset('/projects/web/alvla.webp'),
   },
   {
     key: 'anand',
@@ -51,7 +52,7 @@ export const webProjects: WebProject[] = [
     client: 'Anand and Anand',
     clientUrl: 'https://www.anandandanand.com/',
     tech: 'WordPress · Sage · Migration',
-    image: '/projects/web/anand.webp',
+    image: asset('/projects/web/anand.webp'),
   },
   {
     key: 'haymarket',
@@ -60,7 +61,7 @@ export const webProjects: WebProject[] = [
     client: 'Haymarket Media',
     clientUrl: 'https://www.mmm-online.com/',
     tech: 'WordPress · Multisite · Gutenberg',
-    image: '/projects/web/haymarket.webp',
+    image: asset('/projects/web/haymarket.webp'),
   },
   {
     key: 'advent',
@@ -69,7 +70,7 @@ export const webProjects: WebProject[] = [
     client: 'Teri',
     clientUrl: 'https://teri.ua/',
     tech: 'WordPress · Plugin · AJAX',
-    image: '/projects/web/advent.webp',
+    image: asset('/projects/web/advent.webp'),
   },
   {
     key: 'allensworth',
@@ -78,6 +79,6 @@ export const webProjects: WebProject[] = [
     client: 'Allensworth and Porter',
     clientUrl: 'https://allensworthlaw.com/',
     tech: 'WordPress · ACF · Dompdf',
-    image: '/projects/web/allensworth.webp',
+    image: asset('/projects/web/allensworth.webp'),
   },
 ]

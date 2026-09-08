@@ -1,4 +1,5 @@
 import type { TKey } from '../i18n'
+import { asset } from '../lib/asset'
 
 export type HardwareProject = {
   key: string
@@ -36,8 +37,8 @@ export const hardwareProjects: HardwareProject[] = [
     client: 'Košík.cz',
     clientUrl: 'https://www.kosik.cz',
     photos: {
-      device: '/projects/kosik-box.webp',
-      admin: '/projects/kosik-admin.webp',
+      device: asset('/projects/kosik-box.webp'),
+      admin: asset('/projects/kosik-admin.webp'),
     },
   },
   {
@@ -51,8 +52,8 @@ export const hardwareProjects: HardwareProject[] = [
     client: 'Payment4U a.s.',
     clientUrl: 'https://payment4u.eu',
     photos: {
-      device: '/projects/kiosk-device.webp',
-      admin: '/projects/kiosk-admin.webp',
+      device: asset('/projects/kiosk-device.webp'),
+      admin: asset('/projects/kiosk-admin.webp'),
     },
   },
 ]

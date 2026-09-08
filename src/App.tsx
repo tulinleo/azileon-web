@@ -28,10 +28,11 @@ function Layout() {
 // Single-file review builds (VITE_MEMORY_ROUTER=1) run at an arbitrary URL, so they keep
 // routing in memory instead of the address bar. Production always uses the real URL.
 const Router = import.meta.env.VITE_MEMORY_ROUTER === '1' ? MemoryRouter : BrowserRouter
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
