@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter, Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useLang } from './i18n'
 import Navbar from './components/Navbar'
@@ -25,9 +25,13 @@ function Layout() {
   )
 }
 
+// Single-file review builds (VITE_MEMORY_ROUTER=1) run at an arbitrary URL, so they keep
+// routing in memory instead of the address bar. Production always uses the real URL.
+const Router = import.meta.env.VITE_MEMORY_ROUTER === '1' ? MemoryRouter : BrowserRouter
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
@@ -35,6 +39,6 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
