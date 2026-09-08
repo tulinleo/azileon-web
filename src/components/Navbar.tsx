@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { List, X } from '@phosphor-icons/react'
 import Button from './Button'
 import { useT, useLang } from '../i18n'
@@ -8,12 +9,13 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const t = useT()
   const { lang, setLang } = useLang()
+  const { pathname } = useLocation()
 
   const links = [
-    { href: '#services', label: t('navServices') },
-    { href: '#projects', label: t('navProjects') },
-    { href: '#team', label: t('navTeam') },
-    { href: '#contact', label: t('navContact') },
+    { to: '/#services', label: t('navServices') },
+    { to: '/projects', label: t('navProjects'), active: pathname === '/projects' },
+    { to: '/#team', label: t('navTeam') },
+    { to: '/#contact', label: t('navContact') },
   ]
 
   useEffect(() => {
@@ -37,26 +39,29 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <a
-          href="#"
+        <Link
+          to="/"
           className="font-[var(--font-heading)] text-xl font-semibold text-[var(--color-text)] tracking-tight no-underline"
         >
           Azileon
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="relative text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200 no-underline after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-[var(--color-text)] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+            <Link
+              key={link.to}
+              to={link.to}
+              aria-current={link.active ? 'page' : undefined}
+              className={`relative text-sm transition-colors duration-200 no-underline after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-[var(--color-text)] after:origin-left after:transition-transform after:duration-200 hover:text-[var(--color-text)] hover:after:scale-x-100 ${
+                link.active ? 'text-[var(--color-text)] after:scale-x-100' : 'text-[var(--color-text-secondary)] after:scale-x-0'
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <LangToggle />
-          <Button href="#contact">{t('navCta')}</Button>
+          <Button href="/#contact">{t('navCta')}</Button>
         </div>
 
         {/* Mobile toggle */}
@@ -75,18 +80,21 @@ export default function Navbar() {
       {open && (
         <div id="mobile-nav" className="md:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)] px-6 py-5 flex flex-col gap-1">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.to}
+              to={link.to}
               onClick={() => setOpen(false)}
-              className="text-sm text-[var(--color-text-secondary)] no-underline py-3 border-b border-[var(--color-border)] last:border-b-0"
+              aria-current={link.active ? 'page' : undefined}
+              className={`text-sm no-underline py-3 border-b border-[var(--color-border)] last:border-b-0 ${
+                link.active ? 'text-[var(--color-text)] font-medium' : 'text-[var(--color-text-secondary)]'
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="mt-3 flex items-center gap-4">
             <LangToggle />
-            <Button href="#contact">{t('navCta')}</Button>
+            <Button href="/#contact" onClick={() => setOpen(false)}>{t('navCta')}</Button>
           </div>
         </div>
       )}

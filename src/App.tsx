@@ -1,33 +1,40 @@
+import { BrowserRouter, Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useLang } from './i18n'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import SectionDivider from './components/SectionDivider'
-import Projects from './components/Projects'
-import Team from './components/Team'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ScrollManager from './components/ScrollManager'
+import Home from './pages/Home'
+import ProjectsPage from './pages/ProjectsPage'
 
-export default function App() {
+function Layout() {
   const { lang } = useLang()
-  useScrollReveal(lang)
+  const { pathname } = useLocation()
+  // Re-observe fade-in elements whenever the language or the page changes.
+  useScrollReveal(`${lang}:${pathname}`)
 
   return (
     <>
+      <ScrollManager />
       <Navbar />
       <main>
-        <Hero />
-        <SectionDivider />
-        <Services />
-        <SectionDivider />
-        <Projects />
-        <SectionDivider />
-        <Team />
-        <SectionDivider />
-        <Contact />
+        <Outlet />
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

@@ -260,3 +260,26 @@ h1, h2, h3, h4, h5, h6 {
   background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+/* Lightbox */
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-pop {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-backdrop {
+  animation: lightbox-fade 200ms ease-out;
+}
+
+.lightbox-figure {
+  animation: lightbox-pop 250ms var(--animation-easing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-backdrop, .lightbox-figure { animation: none; }
+}

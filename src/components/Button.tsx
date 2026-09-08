@@ -1,8 +1,10 @@
 import { ArrowRight } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
 
 type ButtonProps = {
   children: React.ReactNode
   variant?: 'primary' | 'secondary'
+  /** "#id" scrolls on the current page; "/path" or "/#id" navigates client-side; anything else is a plain link. */
   href?: string
   type?: 'button' | 'submit'
   onClick?: () => void
@@ -18,12 +20,22 @@ export default function Button({ children, variant = 'primary', href, type = 'bu
   }
 
   const className = `${base} ${variants[variant]} ${extraClass}`
+  const arrow = <ArrowRight size={16} weight="bold" className="transition-transform duration-200 group-hover:translate-x-1" />
+
+  if (href?.startsWith('/')) {
+    return (
+      <Link to={href} onClick={onClick} className={`${className} no-underline`}>
+        {children}
+        {arrow}
+      </Link>
+    )
+  }
 
   if (href) {
     return (
-      <a href={href} className={`${className} no-underline`}>
+      <a href={href} onClick={onClick} className={`${className} no-underline`}>
         {children}
-        <ArrowRight size={16} weight="bold" className="transition-transform duration-200 group-hover:translate-x-1" />
+        {arrow}
       </a>
     )
   }
@@ -31,7 +43,7 @@ export default function Button({ children, variant = 'primary', href, type = 'bu
   return (
     <button type={type} onClick={onClick} className={className}>
       {children}
-      <ArrowRight size={16} weight="bold" className="transition-transform duration-200 group-hover:translate-x-1" />
+      {arrow}
     </button>
   )
 }
