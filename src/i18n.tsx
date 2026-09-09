@@ -70,15 +70,6 @@ export const translations = {
     // Projects
     projectsLabel: 'Selected work',
     projectsTitle: 'Projects that shipped',
-    projPaymentTitle: 'Payment terminal & parcel locker platform',
-    projPaymentDesc: 'Development of software for cash and cashless payment terminals and automated parcel locker systems. Full-stack platform handling device communication, payment processing and operator management.',
-    projBleTitle: 'BLE asset tracking system',
-    projBleDesc: 'Design and implementation of a Bluetooth Low Energy tracking system for indoor asset management. Real-time positioning, geofencing and analytics dashboard.',
-    projSelfServiceTitle: 'Self-service device software',
-    projSelfServiceDesc: 'Continuous development and feature expansion for a range of self-service devices. Modular architecture enabling rapid deployment of new device types.',
-    tagFintech: 'Fintech',
-    tagIot: 'IoT',
-    tagHardware: 'Hardware',
 
     // Page meta
     homePageTitle: 'Azileon — Software for terminals, lockers & self-service devices',
@@ -125,6 +116,8 @@ export const translations = {
     projectsCtaBody: 'Tell us what it should do and we will come back with a plan within one business day.',
     projectsCta: 'Get in touch',
     allProjects: 'All projects',
+    carouselPrev: 'Previous projects',
+    carouselNext: 'Next projects',
     lightboxOpen: 'Enlarge photo',
     lightboxClose: 'Close',
 
@@ -196,15 +189,6 @@ export const translations = {
     // Projects
     projectsLabel: 'Vybrané práce',
     projectsTitle: 'Dodané projekty',
-    projPaymentTitle: 'Platforma pro platební terminály a parcel lockery',
-    projPaymentDesc: 'Vývoj softwaru pro hotovostní i bezhotovostní platební terminály a automatizované systémy parcel lockerů. Full-stack platforma zajišťující komunikaci se zařízeními, zpracování plateb a správu operátorů.',
-    projBleTitle: 'BLE systém sledování aktiv',
-    projBleDesc: 'Návrh a implementace Bluetooth Low Energy sledovacího systému pro správu aktiv v interiéru. Real-time pozicování, geofencing a analytický dashboard.',
-    projSelfServiceTitle: 'Software pro samoobslužná zařízení',
-    projSelfServiceDesc: 'Průběžný vývoj a rozšiřování funkcí pro řadu samoobslužných zařízení. Modulární architektura umožňující rychlé nasazení nových typů zařízení.',
-    tagFintech: 'Fintech',
-    tagIot: 'IoT',
-    tagHardware: 'Hardware',
 
     // Page meta
     homePageTitle: 'Azileon — Software pro terminály, lockery a samoobslužná zařízení',
@@ -251,6 +235,8 @@ export const translations = {
     projectsCtaBody: 'Řekněte nám, co má umět, a do jednoho pracovního dne se ozveme s plánem.',
     projectsCta: 'Ozvěte se nám',
     allProjects: 'Všechny projekty',
+    carouselPrev: 'Předchozí projekty',
+    carouselNext: 'Další projekty',
     lightboxOpen: 'Zvětšit fotografii',
     lightboxClose: 'Zavřít',
 
