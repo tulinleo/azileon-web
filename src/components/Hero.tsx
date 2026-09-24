@@ -1,21 +1,34 @@
+import { lazy, Suspense, useSyncExternalStore } from 'react'
 import Button from './Button'
-import KioskIllustration from './KioskIllustration'
 import { useT } from '../i18n'
+
+/* First screen: the pitch on the left, the "Our products" 3D showcase on the right — the products in two tiers,
+   each with its label, on a fixed camera. The showcase carries three.js: loaded on demand, and only where it is
+   shown (md and up); phones get the text alone. */
+const ProductShowcase = lazy(() => import('./ProductShowcase'))
+const DESKTOP = '(min-width: 768px)'
+const subscribe = (cb: () => void) => {
+  const mq = window.matchMedia(DESKTOP)
+  mq.addEventListener('change', cb)
+  return () => mq.removeEventListener('change', cb)
+}
+const useDesktop = () => useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP).matches, () => false)
 
 export default function Hero() {
   const t = useT()
+  const desktop = useDesktop()
 
   return (
     <section id="home" className="min-h-screen flex items-center px-6 pt-16 dot-grid">
-      <div className="max-w-6xl mx-auto w-full flex items-center justify-between gap-12">
-        <div className="max-w-2xl">
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-[minmax(0,10fr)_minmax(0,13fr)] items-center gap-10 lg:gap-12 py-12 md:py-16">
+        <div className="max-w-xl">
           <p className="hero-animate hero-delay-1 text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4 font-medium">
             {t('heroLabel')}
           </p>
-          <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-[clamp(2.5rem,5vw_+_1rem,5.5rem)] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6">
+          <h1 className="hero-animate hero-delay-2 font-[var(--font-heading)] text-[clamp(2.5rem,3vw_+_0.75rem,3.75rem)] font-semibold text-[var(--color-text)] tracking-tight leading-[1.05] mb-6 text-balance">
             {t('heroTitle')}
           </h1>
-          <p className="hero-animate hero-delay-3 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[50ch] mb-8">
+          <p className="hero-animate hero-delay-3 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[46ch] mb-8">
             {t('heroBody')}
           </p>
           <div className="hero-animate hero-delay-4">
@@ -23,9 +36,13 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Kiosk illustration — desktop only */}
-        <div className="hidden md:block shrink-0 opacity-70 kiosk-float-delayed">
-          <KioskIllustration />
+        {/* "Our products" 3D showcase — desktop only, fixed camera; runs a little past the container on the right */}
+        <div className="hidden md:block relative h-[420px] lg:h-[520px] lg:-mr-10 hero-animate hero-delay-3">
+          {desktop && (
+            <Suspense fallback={null}>
+              <ProductShowcase />
+            </Suspense>
+          )}
         </div>
       </div>
     </section>

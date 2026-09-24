@@ -255,6 +255,23 @@ h1, h2, h3, h4, h5, h6 {
   animation: mail-travel 10s ease-in-out infinite 2s;
 }
 
+/* "Our products" 3D showcase in the hero (components/ProductShowcase.tsx): a label pinned to each product, in the
+   site's palette like the mockup — accent dot and line, white card with the usual border and a soft warm shadow.
+   `.above` cards hang over the floating products, `.below` cards sit under the standing ones. */
+.showcase { position: relative; }
+.showcase canvas { display: block; }
+.showcase-labels { position: absolute; inset: 0; pointer-events: none; color: var(--color-text); }
+.showcase .lbl { --rise: 28px; position: absolute; left: 0; top: 0; visibility: hidden; will-change: transform; }
+.showcase .lbl .dot { position: absolute; left: 0; top: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); transform: translate(-50%, -50%); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9); }
+.showcase .lbl .line { position: absolute; left: 0; width: 1.5px; height: var(--rise); background: color-mix(in srgb, var(--color-accent) 60%, transparent); transform: translateX(-50%); }
+.showcase .lbl.above .line { top: calc(-1 * var(--rise)); }
+.showcase .lbl.below .line { top: 0; }
+.showcase .lbl .card { position: absolute; left: 0; white-space: nowrap; padding: 6px 11px; border-radius: 14px; background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: 0 6px 20px rgba(60, 45, 30, 0.06); }
+.showcase .lbl.above .card { top: calc(-1 * var(--rise)); transform: translate(-50%, -100%); }
+.showcase .lbl.below .card { top: var(--rise); transform: translateX(-50%); }
+.showcase .lbl .ttl { font-size: 13px; font-weight: 600; letter-spacing: -0.2px; line-height: 1.25; color: var(--color-text); }
+.showcase .lbl .sub { font-size: 11px; color: var(--color-text-muted); margin-top: 2px; line-height: 1.25; }
+
 /* Dot grid background */
 .dot-grid {
   background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);

@@ -55,6 +55,18 @@ export const translations = {
     heroBody: 'We build and maintain the embedded software and business logic for your hardware — so you can ship faster without growing a full in-house dev team.',
     heroCta: 'Get in touch',
 
+    // Hero: labels on the 3D product showcase
+    showcaseSolarTitle: 'Solar monitoring',
+    showcaseSolarSub: 'Live output & panel alerts',
+    showcasePayTitle: 'Payment terminals',
+    showcasePaySub: 'ATMs, kiosks, card terminals',
+    showcaseWebTitle: 'Custom websites',
+    showcaseWebSub: 'Any site, made to order',
+    showcaseVendTitle: 'Smart vending',
+    showcaseVendSub: 'Cashless, remote stock',
+    showcaseLockTitle: 'Parcel lockers',
+    showcaseLockSub: 'Code pickup, live status',
+
     // Services
     servicesLabel: 'What we do',
     servicesTitle: 'Focused expertise for\nspecialized hardware',
@@ -86,6 +98,8 @@ export const translations = {
     webSectionLabel: 'Web',
     webSectionTitle: 'Websites & web apps',
     webSectionIntro: 'Websites, stores and custom WordPress modules we have built or taken over. Click a screenshot to enlarge it.',
+    webBatteryTitle: 'AI battery dispatcher for solar plants',
+    webBatteryDesc: 'Our own product and its page: a 3D model of a solar plant with a live day simulation — the AI charges the batteries in the cheapest hours and sells at the evening peak. Four languages, delivered turnkey to plant owners.',
     webLegalwawTitle: 'Turnkey site for a law practice',
     webLegalwawDesc: 'For Hroda Law in Warsaw we handled the whole project: designed the site, built it on WordPress, set up three languages, filled it with content and hosted it. The client edits everything without a developer.',
     webAlvibcoTitle: 'Multilingual version of an existing site',
@@ -174,6 +188,18 @@ export const translations = {
     heroBody: 'Vyvíjíme a spravujeme embedded software a business logiku pro váš hardware — abyste mohli rychleji nasazovat nové funkce bez nutnosti budovat vlastní vývojový tým.',
     heroCta: 'Kontaktujte nás',
 
+    // Hero: labels on the 3D product showcase
+    showcaseSolarTitle: 'Solární monitoring',
+    showcaseSolarSub: 'Výkon naživo a hlášení panelů',
+    showcasePayTitle: 'Platební terminály',
+    showcasePaySub: 'Bankomaty, kiosky, karetní terminály',
+    showcaseWebTitle: 'Weby na míru',
+    showcaseWebSub: 'Jakýkoli web na zakázku',
+    showcaseVendTitle: 'Chytrý vending',
+    showcaseVendSub: 'Bez hotovosti, vzdálený sklad',
+    showcaseLockTitle: 'Výdejní boxy',
+    showcaseLockSub: 'Výdej kódem, stav naživo',
+
     // Services
     servicesLabel: 'Co děláme',
     servicesTitle: 'Zaměřená expertíza pro\nspecializovaný hardware',
@@ -205,6 +231,8 @@ export const translations = {
     webSectionLabel: 'Web',
     webSectionTitle: 'Weby a webové aplikace',
     webSectionIntro: 'Weby, e-shopy a vlastní moduly pro WordPress, které jsme postavili nebo převzali. Kliknutím na snímek ho zvětšíte.',
+    webBatteryTitle: 'AI dispečer baterií pro solární elektrárny',
+    webBatteryDesc: 'Náš vlastní produkt a jeho stránka: 3D model elektrárny se simulací dne naživo — AI nabíjí baterie v nejlevnějších hodinách a prodává ve večerní špičce. Čtyři jazyky, majitelům elektráren dodáváme na klíč.',
     webLegalwawTitle: 'Web pro právní praxi na klíč',
     webLegalwawDesc: 'Pro Hroda Law ve Varšavě jsme zajistili celý projekt: navrhli design, postavili web na WordPressu, nastavili tři jazyky, naplnili obsah a zajistili hosting. Klient dnes vše upravuje bez vývojáře.',
     webAlvibcoTitle: 'Vícejazyčná verze hotového webu',

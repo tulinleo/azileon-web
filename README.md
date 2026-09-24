@@ -1,6 +1,17 @@
-# React + TypeScript + Vite
+# Azileon website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + Vite + TypeScript + Tailwind v4, routed with react-router, deployed on Vercel (`vercel.json` rewrites every path to `index.html`).
+
+- `src/pages/Home.tsx` — Hero, Services, Projects carousel, Team, Contact. The hero's illustration is the "Our products"
+  3D showcase (`src/components/ProductShowcase.tsx` + `src/scene/`): the Claude Design scene ported to three.js/TypeScript,
+  fixed camera, loaded lazily and only on md screens and up; label texts live in `src/i18n.tsx` (`showcase*`).
+- `src/pages/ProjectsPage.tsx` — hardware cases and the web portfolio (`src/data/*Projects.ts`). The first web entry is
+  Azileon's own product page, the AI battery dispatcher landing (github.com/zazplay/battery-dispatcher); its link is the
+  landing's URL, update it when the page moves to a subdomain.
+
+## Template notes
+
+This project was started from the React + TypeScript + Vite template; the notes below are the template's.
 
 Currently, two official plugins are available:
 

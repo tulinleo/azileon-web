@@ -19,6 +19,16 @@ export type WebProject = {
  */
 export const webProjects: WebProject[] = [
   {
+    // Azileon's own product page (github.com/zazplay/battery-dispatcher); update the URL when it moves to a subdomain
+    key: 'battery',
+    titleKey: 'webBatteryTitle',
+    descKey: 'webBatteryDesc',
+    client: 'Azileon',
+    clientUrl: 'https://zazplay.github.io/battery-dispatcher/',
+    tech: 'React · three.js · Vite',
+    image: asset('/projects/web/battery-dispatcher.webp'),
+  },
+  {
     key: 'legalwaw',
     titleKey: 'webLegalwawTitle',
     descKey: 'webLegalwawDesc',
