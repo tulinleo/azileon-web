@@ -37,7 +37,7 @@ export default function Hero() {
         </div>
 
         {/* "Our products" 3D showcase — desktop only, fixed camera; runs a little past the container on the right */}
-        <div className="hidden md:block relative h-[420px] lg:h-[520px] lg:-mr-10 hero-animate hero-delay-3">
+        <div className="hidden md:block relative h-[480px] lg:h-[620px] lg:-mr-4 xl:-mr-16 2xl:-mr-24 hero-animate hero-delay-3">
           {desktop && (
             <Suspense fallback={null}>
               <ProductShowcase />

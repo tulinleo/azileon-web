@@ -32,7 +32,7 @@ export default function ProductShowcase() {
     }
     const show = buildProducts()
     // margin < 1 leaves room around the objects for the labels above the upper tier and below the lower one
-    stage.setObject(show.root, { margin: 0.85, shadows: false })
+    stage.setObject(show.root, { margin: 1.0, shadows: false })
 
     const nodes = LABEL_IDS.map((id) => {
       const el = layer.querySelector<HTMLDivElement>(`[data-id="${id}"]`)!
