@@ -1,28 +1,46 @@
-/** Eyebrow + title + optional sub-line, the way every section on the site opens. */
+/** Eyebrow + title + optional sub-line, the way every panel opens. `split` puts the sub-line to the right of the
+    title, both bottom-aligned (the Solutions and Projects headers in the mockup). */
 type Props = {
   label: string
   title: string
   sub?: string
-  align?: 'left' | 'center'
-  /** Bottom margin under the header; sections with a dense grid want less. */
+  tone?: 'light' | 'dark'
+  layout?: 'stack' | 'split'
+  /** Bottom margin under the header. */
   className?: string
+  /** The heading level: h2 in a section, h1 at the top of a page. */
+  as?: 'h1' | 'h2'
 }
 
-export default function SectionHeader({ label, title, sub, align = 'left', className = 'mb-10 md:mb-12' }: Props) {
-  const centered = align === 'center'
+export default function SectionHeader({ label, title, sub, tone = 'light', layout = 'stack', className = 'mb-11', as: Heading = 'h2' }: Props) {
+  const dark = tone === 'dark'
+  const eyebrow = (
+    <p className={`text-xs tracking-[0.15em] uppercase font-semibold mb-4 ${dark ? 'text-accent-2' : 'text-accent'}`}>{label}</p>
+  )
+  const heading = (
+    <Heading className="font-heading text-[clamp(2rem,3.6vw,3rem)] font-medium tracking-[-0.035em] leading-[1.06] text-balance">
+      {title}
+    </Heading>
+  )
+  const subClass = `text-base leading-[1.6] ${dark ? 'text-cream-2' : 'text-ink-2'}`
+
+  if (layout === 'split') {
+    return (
+      <div className={`flex flex-wrap justify-between items-end gap-x-12 gap-y-6 ${className}`}>
+        <div className="max-w-[720px]">
+          {eyebrow}
+          {heading}
+        </div>
+        {sub && <p className={`${subClass} max-w-[40ch]`}>{sub}</p>}
+      </div>
+    )
+  }
+
   return (
-    <div className={`${centered ? 'text-center mx-auto' : ''} ${className}`}>
-      <p className="fade-in text-sm tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-3 font-medium">{label}</p>
-      <h2
-        className={`fade-in stagger-1 font-[var(--font-heading)] text-3xl md:text-[clamp(2rem,3.5vw,3rem)] font-medium text-[var(--color-text)] tracking-tight leading-[1.1] text-balance ${centered ? 'max-w-[24ch] mx-auto' : 'max-w-[26ch]'}`}
-      >
-        {title}
-      </h2>
-      {sub && (
-        <p className={`fade-in stagger-2 text-[var(--color-text-secondary)] leading-relaxed text-base md:text-lg mt-4 max-w-[58ch] ${centered ? 'mx-auto' : ''}`}>
-          {sub}
-        </p>
-      )}
+    <div className={className}>
+      {eyebrow}
+      {heading}
+      {sub && <p className={`${subClass} mt-4 max-w-[58ch]`}>{sub}</p>}
     </div>
   )
 }

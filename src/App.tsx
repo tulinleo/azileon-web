@@ -3,11 +3,14 @@ import { useScrollReveal } from './hooks/useScrollReveal'
 import { useLang } from './i18n'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import BackToTop from './components/BackToTop'
 import ScrollManager from './components/ScrollManager'
 import Home from './pages/Home'
 import ProjectsPage from './pages/ProjectsPage'
 import SolutionPage from './pages/SolutionPage'
 
+/* The bento frame: one centred column; the header, every section of the page and the footer are cards in it,
+   separated by the same gap. <main> is display: contents so a page's sections join the column directly. */
 function Layout() {
   const { lang } = useLang()
   const { pathname } = useLocation()
@@ -17,11 +20,14 @@ function Layout() {
   return (
     <>
       <ScrollManager />
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
+      <div className="mx-auto max-w-[1320px] px-[clamp(10px,1.4vw,16px)] pt-3 pb-4 flex flex-col gap-bento">
+        <Navbar />
+        <main className="contents">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+      <BackToTop />
     </>
   )
 }

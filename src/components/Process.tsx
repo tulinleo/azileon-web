@@ -1,32 +1,42 @@
-import AnimatedSection from './AnimatedSection'
+import Panel from './Panel'
 import SectionHeader from './SectionHeader'
-import CircuitLines from './illustrations/CircuitLines'
 import { useT } from '../i18n'
 
-/* Four steps from the first visit to the handover — the same for every product line. */
+/* Four steps from the first visit to the handover, on four surfaces: paper, beige, ink, accent. */
+const TONE = [
+  { card: 'bg-paper text-ink', num: 'text-accent', chip: 'bg-page' },
+  { card: 'bg-page text-ink', num: 'text-accent', chip: 'bg-surface' },
+  { card: 'bg-ink text-paper', num: 'text-accent-2', chip: 'bg-dark-2' },
+  { card: 'bg-accent text-white', num: 'text-white', chip: 'bg-white/18' },
+]
+
 export default function Process() {
   const t = useT()
   const steps = [
-    { title: t('step1Title'), text: t('step1Text') },
-    { title: t('step2Title'), text: t('step2Text') },
-    { title: t('step3Title'), text: t('step3Text') },
-    { title: t('step4Title'), text: t('step4Text') },
+    { title: t('step1Title'), text: t('step1Text'), when: t('step1When') },
+    { title: t('step2Title'), text: t('step2Text'), when: t('step2When') },
+    { title: t('step3Title'), text: t('step3Text'), when: t('step3When') },
+    { title: t('step4Title'), text: t('step4Text'), when: t('step4When') },
   ]
   return (
-    <AnimatedSection id="process">
-      <CircuitLines />
-      <div className="max-w-6xl mx-auto relative">
-        <SectionHeader label={t('processLabel')} title={t('processTitle')} />
-        <ol className="m-0 p-0 list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((s, i) => (
-            <li key={s.title} className={`fade-in stagger-${i + 1} border-t-2 border-[var(--color-accent)] pt-5`}>
-              <span className="block font-[var(--font-heading)] text-sm font-medium tracking-[0.1em] text-[var(--color-accent)] mb-3">0{i + 1}</span>
-              <h3 className="font-[var(--font-heading)] text-lg font-medium text-[var(--color-text)] mb-2">{s.title}</h3>
-              <p className="text-[15px] text-[var(--color-text-secondary)] leading-relaxed">{s.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </AnimatedSection>
+    <Panel id="process">
+      <SectionHeader label={t('processLabel')} title={t('processTitle')} className="fade-in mb-11" />
+      <ol className="m-0 p-0 list-none grid grid-cols-[repeat(auto-fit,minmax(min(100%,230px),1fr))] gap-3.5">
+        {steps.map((s, i) => (
+          <li key={s.title} className={`fade-in stagger-${i + 1}`}>
+            <div
+              className={`h-full rounded-tile p-[26px] min-h-[230px] flex flex-col transition-[transform,box-shadow] duration-[350ms] ease-soft hover:-translate-y-1 hover:shadow-[0_18px_36px_-20px_rgba(26,26,26,.3)] ${TONE[i].card}`}
+            >
+              <div className="flex justify-between items-center mb-auto">
+                <span className={`font-heading text-[44px] font-medium tracking-[-0.04em] leading-none ${TONE[i].num}`}>0{i + 1}</span>
+                <span className={`text-xs font-semibold tracking-[0.06em] uppercase px-2.5 py-1.5 rounded-full ${TONE[i].chip}`}>{s.when}</span>
+              </div>
+              <h3 className="font-heading text-[21px] font-medium mt-9 mb-2">{s.title}</h3>
+              <p className="text-sm leading-[1.55] opacity-80">{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Panel>
   )
 }

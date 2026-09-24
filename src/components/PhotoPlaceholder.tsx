@@ -21,7 +21,7 @@ export default function PhotoPlaceholder({ src, alt, label, icon: IconCmp, aspec
   const t = useT()
 
   if (src) {
-    const frameClass = 'relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] block w-full p-0'
+    const frameClass = 'relative rounded-inner overflow-hidden border border-line bg-surface block w-full p-0'
     const image = (
       <img
         src={src}
@@ -39,13 +39,13 @@ export default function PhotoPlaceholder({ src, alt, label, icon: IconCmp, aspec
             type="button"
             onClick={onOpen}
             aria-label={`${t('lightboxOpen')}: ${alt}`}
-            className={`${frameClass} group cursor-zoom-in focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:outline-none`}
+            className={`${frameClass} group cursor-zoom-in focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none`}
             style={{ aspectRatio: aspect }}
           >
             {image}
             <span
               aria-hidden="true"
-              className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 text-[var(--color-text)] flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
+              className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 text-ink flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200"
             >
               <MagnifyingGlassPlus size={18} weight="bold" />
             </span>
@@ -55,7 +55,7 @@ export default function PhotoPlaceholder({ src, alt, label, icon: IconCmp, aspec
             {image}
           </div>
         )}
-        <figcaption className="mt-2 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] font-medium">
+        <figcaption className="mt-2 text-xs tracking-[0.1em] uppercase text-ink-3 font-medium">
           {label}
         </figcaption>
       </figure>
@@ -67,7 +67,7 @@ export default function PhotoPlaceholder({ src, alt, label, icon: IconCmp, aspec
       <div
         role="img"
         aria-label={alt}
-        className="rounded-2xl border border-dashed border-[var(--color-border-hover)] bg-[var(--color-surface)]/60 flex flex-col items-center justify-center gap-2 text-[var(--color-text-muted)]"
+        className="rounded-inner border border-dashed border-line-2 bg-surface/60 flex flex-col items-center justify-center gap-2 text-ink-3"
         style={{ aspectRatio: aspect }}
       >
         <IconCmp size={28} weight="regular" />

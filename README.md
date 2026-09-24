@@ -2,8 +2,14 @@
 
 React 19 + Vite + TypeScript + Tailwind v4, routed with react-router, deployed on Vercel (`vercel.json` rewrites every path to `index.html`).
 
-- `/` — `src/pages/Home.tsx`: Hero (with the "Our products" 3D showcase), TrustStrip, Solutions, AI, Process, Projects
-  carousel, Team, Contact.
+The layout follows the bento mockup (`index copy.html`, kept out of git): a warm beige page, every section a rounded
+card in one centred column (`src/App.tsx`), a floating header with a reading-progress bar, ink / white / accent cards.
+Tokens live in `src/index.css` (`@theme`) and are used as Tailwind utilities (`bg-paper`, `text-ink-2`, `rounded-card`,
+`gap-bento`, `p-panel` …). Section-level building blocks: `Panel` (the big card), `SectionHeader`, `Card`, `Button`,
+`CtaBand`.
+
+- `/` — `src/pages/Home.tsx`: Hero (pitch card, the "Our products" 3D showcase card, three facts), TrustStrip, Solutions,
+  AI (accordion + live demo), Process, Projects (filterable grid), Team, Contact (form with topic chips).
 - `/solutions/:slug` — `src/pages/SolutionPage.tsx`: one template for the five product lines (parcel-lockers,
   payment-terminals, smart-vending, websites, solar), driven by `src/data/solutions.ts`; the showcase is focused on that
   product. Texts are the `sol*` keys in `src/i18n.tsx`.

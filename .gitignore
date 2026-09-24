@@ -28,3 +28,7 @@ dist-ssr
 
 # Root video duplicate
 /az_video.mp4
+azileon-home.html
+azileon-products-3d*.png
+# The bento mockup the layout follows
+index copy.html

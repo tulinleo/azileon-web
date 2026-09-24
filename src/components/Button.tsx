@@ -1,32 +1,55 @@
-import { ArrowRight } from '@phosphor-icons/react'
+import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 type ButtonProps = {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary'
+  /** primary — accent; secondary — beige; white — on accent cards; dark — ink. */
+  variant?: 'primary' | 'secondary' | 'white' | 'dark'
+  /** sm — header; md — the usual; lg — the form's full-width submit. */
+  size?: 'sm' | 'md' | 'lg'
+  /** Trailing arrow: true for →, 'external' for ↗, false for none (secondary buttons in the mockup have none). */
+  arrow?: boolean | 'external'
   /** "#id" scrolls on the current page; "/path" or "/#id" navigates client-side; anything else is a plain link. */
   href?: string
   type?: 'button' | 'submit'
   onClick?: () => void
+  disabled?: boolean
   className?: string
 }
 
-export default function Button({ children, variant = 'primary', href, type = 'button', onClick, className: extraClass = '' }: ButtonProps) {
-  const base = 'inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer group focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:outline-none'
+const SIZE = {
+  sm: 'px-5 py-3 text-sm rounded-xl',
+  md: 'px-[26px] py-4 text-[15px] rounded-btn',
+  lg: 'px-7 py-[18px] text-base font-semibold rounded-btn',
+}
 
-  const variants = {
-    primary: 'bg-[var(--color-accent)] text-white border-none hover:bg-[var(--color-accent-hover)] active:scale-[0.98]',
-    secondary: 'bg-transparent text-[var(--color-text)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] active:scale-[0.98]',
-  }
+const VARIANT = {
+  primary: 'bg-accent text-white hover:bg-accent-hover hover:text-white',
+  secondary: 'bg-page text-ink hover:bg-[#E8E2D9] hover:text-ink',
+  white: 'bg-surface text-ink hover:bg-paper hover:text-accent',
+  dark: 'bg-ink text-white hover:bg-accent hover:text-white',
+}
 
-  const className = `${base} ${variants[variant]} ${extraClass}`
-  const arrow = <ArrowRight size={16} weight="bold" className="transition-transform duration-200 group-hover:translate-x-1" />
+export default function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  arrow = variant === 'primary' || variant === 'white' || variant === 'dark',
+  href,
+  type = 'button',
+  onClick,
+  disabled,
+  className: extraClass = '',
+}: ButtonProps) {
+  const className = `group inline-flex items-center justify-center gap-2.5 font-medium whitespace-nowrap border-0 cursor-pointer no-underline disabled:opacity-70 disabled:cursor-default ${SIZE[size]} ${VARIANT[variant]} ${extraClass}`
+  const Icon = arrow === 'external' ? ArrowUpRight : ArrowRight
+  const tail = arrow ? <Icon size={size === 'sm' ? 14 : 16} weight="bold" className="transition-transform duration-300 ease-soft group-hover:translate-x-[3px]" /> : null
 
   if (href?.startsWith('/')) {
     return (
-      <Link to={href} onClick={onClick} className={`${className} no-underline`}>
+      <Link to={href} onClick={onClick} className={className}>
         {children}
-        {arrow}
+        {tail}
       </Link>
     )
   }
@@ -34,17 +57,17 @@ export default function Button({ children, variant = 'primary', href, type = 'bu
   if (href) {
     const external = /^https?:\/\//.test(href) // another site opens in a new tab
     return (
-      <a href={href} onClick={onClick} className={`${className} no-underline`} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+      <a href={href} onClick={onClick} className={className} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
         {children}
-        {arrow}
+        {tail}
       </a>
     )
   }
 
   return (
-    <button type={type} onClick={onClick} className={className}>
+    <button type={type} onClick={onClick} disabled={disabled} className={className}>
       {children}
-      {arrow}
+      {tail}
     </button>
   )
 }

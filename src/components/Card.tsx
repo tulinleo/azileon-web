@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+/* A tile inside a panel: paper surface, hairline border, lifts on hover. Renders as a link when given `to` / `href`. */
 type CardProps = {
   children: React.ReactNode
   className?: string
@@ -7,14 +8,18 @@ type CardProps = {
   href?: string
   /** Internal route: the card becomes a client-side <Link>. */
   to?: string
+  /** Turn the hover lift off (for tiles that are not clickable). */
+  still?: boolean
 }
 
-export default function Card({ children, className = '', href, to }: CardProps) {
-  const base = 'bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl transition-all duration-300 hover:border-[var(--color-border-hover)] hover:-translate-y-0.5 hover:shadow-lg'
+export const LIFT = 'transition-[transform,box-shadow,border-color] duration-[350ms] ease-soft hover:-translate-y-1 hover:shadow-lift hover:border-line-2'
+
+export default function Card({ children, className = '', href, to, still }: CardProps) {
+  const base = `bg-paper border border-line rounded-tile text-ink ${still ? '' : LIFT}`
 
   if (to) {
     return (
-      <Link to={to} className={`${base} block no-underline focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none ${className}`}>
+      <Link to={to} className={`${base} block no-underline hover:text-ink ${className}`}>
         {children}
       </Link>
     )
@@ -22,7 +27,7 @@ export default function Card({ children, className = '', href, to }: CardProps) 
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} block no-underline ${className}`}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} block no-underline hover:text-ink ${className}`}>
         {children}
       </a>
     )

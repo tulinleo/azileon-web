@@ -3,7 +3,6 @@ import TrustStrip from '../components/TrustStrip'
 import Solutions from '../components/Solutions'
 import AiSection from '../components/AiSection'
 import Process from '../components/Process'
-import SectionDivider from '../components/SectionDivider'
 import Projects from '../components/Projects'
 import Team from '../components/Team'
 import Contact from '../components/Contact'
@@ -19,15 +18,10 @@ export default function Home() {
       <Hero />
       <TrustStrip />
       <Solutions />
-      <SectionDivider />
       <AiSection />
-      <SectionDivider />
       <Process />
-      <SectionDivider />
       <Projects />
-      <SectionDivider />
       <Team />
-      <SectionDivider />
       <Contact />
     </>
   )
