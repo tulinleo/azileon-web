@@ -200,6 +200,18 @@ input:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(184, 110, 47, .14); }
   .az-header.is-open .az-menu { display: flex; animation: menu-in .32s var(--ease-soft) both; }
 }
 
+/* Hover lift without the jitter: the element that takes the hover (.lift) never moves, so the pointer cannot slip
+   off its edge while the card rises; only its body (.lift-body) is transformed, on its own compositor layer so the
+   text stays crisp through the motion. `.lift-sm` is the gentler 3px version. */
+.lift > .lift-body {
+  --lift-y: -4px; --lift-shadow: var(--shadow-lift);
+  transition: transform .35s var(--ease-soft), box-shadow .35s var(--ease-soft), border-color .25s ease;
+  will-change: transform;
+}
+.lift.lift-sm > .lift-body { --lift-y: -3px; --lift-shadow: var(--shadow-lift-sm); }
+.lift:hover > .lift-body { transform: translateY(var(--lift-y)); box-shadow: var(--lift-shadow); border-color: var(--color-line-2); }
+.lift:active { transform: none; } /* the press-down scale would fight the lift */
+
 /* Scroll reveal (hooks/useScrollReveal.ts): hidden until it enters the viewport, then rises; the hook drops the
    class once the reveal has played, so the element's own hover transitions take over afterwards. */
 .fade-in {

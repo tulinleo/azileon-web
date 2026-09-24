@@ -23,10 +23,8 @@ export default function Process() {
       <SectionHeader label={t('processLabel')} title={t('processTitle')} className="fade-in mb-11" />
       <ol className="m-0 p-0 list-none grid grid-cols-[repeat(auto-fit,minmax(min(100%,230px),1fr))] gap-3.5">
         {steps.map((s, i) => (
-          <li key={s.title} className={`fade-in stagger-${i + 1}`}>
-            <div
-              className={`h-full rounded-tile p-[26px] min-h-[230px] flex flex-col transition-[transform,box-shadow] duration-[350ms] ease-soft hover:-translate-y-1 hover:shadow-[0_18px_36px_-20px_rgba(26,26,26,.3)] ${TONE[i].card}`}
-            >
+          <li key={s.title} className={`fade-in stagger-${i + 1} lift`}>
+            <div className={`lift-body h-full rounded-tile p-[26px] min-h-[230px] flex flex-col ${TONE[i].card}`}>
               <div className="flex justify-between items-center mb-auto">
                 <span className={`font-heading text-[44px] font-medium tracking-[-0.04em] leading-none ${TONE[i].num}`}>0{i + 1}</span>
                 <span className={`text-xs font-semibold tracking-[0.06em] uppercase px-2.5 py-1.5 rounded-full ${TONE[i].chip}`}>{s.when}</span>

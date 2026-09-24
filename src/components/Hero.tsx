@@ -57,12 +57,11 @@ export default function Hero() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 auto-rows-fr gap-bento">
         {facts.map((f, i) => (
-          <div
-            key={f}
-            className={`hero-animate hero-delay-${i + 2} rounded-inner p-5 min-h-[120px] flex flex-col justify-between gap-3 text-base font-medium leading-[1.4] transition-[transform,box-shadow] duration-[350ms] ease-soft hover:-translate-y-[3px] hover:shadow-lift-sm ${FACT_TONE[i].card}`}
-          >
-            <CheckCircle size={20} weight="bold" className={FACT_TONE[i].icon} />
-            {f}
+          <div key={f} className={`hero-animate hero-delay-${i + 2} lift lift-sm`}>
+            <div className={`lift-body h-full rounded-inner p-5 min-h-[120px] flex flex-col justify-between gap-3 text-base font-medium leading-[1.4] ${FACT_TONE[i].card}`}>
+              <CheckCircle size={20} weight="bold" className={FACT_TONE[i].icon} />
+              {f}
+            </div>
           </div>
         ))}
       </div>

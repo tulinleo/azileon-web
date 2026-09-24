@@ -63,8 +63,8 @@ export default function SolutionPage() {
         <SectionHeader label={t('solDeliverLabel')} title={t('solDeliverTitle')} className="fade-in mb-11" />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,230px),1fr))] gap-3.5">
           {s.deliver.map((d, i) => (
-            <div key={d.title} className={`fade-in stagger-${i + 1}`}>
-              <div className={`h-full rounded-tile p-[26px] min-h-[200px] flex flex-col transition-[transform,box-shadow] duration-[350ms] ease-soft hover:-translate-y-1 hover:shadow-lift ${DELIVER_TONE[i].card}`}>
+            <div key={d.title} className={`fade-in stagger-${i + 1} lift`}>
+              <div className={`lift-body h-full rounded-tile p-[26px] min-h-[200px] flex flex-col ${DELIVER_TONE[i].card}`}>
                 <span className={`font-heading text-[44px] font-medium tracking-[-0.04em] leading-none mb-auto ${DELIVER_TONE[i].num}`}>0{i + 1}</span>
                 <h3 className="font-heading text-[21px] font-medium mt-9 mb-2">{t(d.title)}</h3>
                 <p className="text-sm leading-[1.55] opacity-80">{t(d.text)}</p>

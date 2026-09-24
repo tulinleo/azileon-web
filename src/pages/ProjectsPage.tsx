@@ -5,7 +5,6 @@ import SectionHeader from '../components/SectionHeader'
 import CtaBand from '../components/CtaBand'
 import PhotoPlaceholder from '../components/PhotoPlaceholder'
 import Lightbox from '../components/Lightbox'
-import { LIFT } from '../components/Card'
 import { hardwareProjects } from '../data/hardwareProjects'
 import { webProjects } from '../data/webProjects'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -91,8 +90,8 @@ export default function ProjectsPage() {
         <SectionHeader layout="split" label={t('webSectionLabel')} title={t('webSectionTitle')} sub={t('webSectionIntro')} className="fade-in mb-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4">
           {webProjects.map((w, i) => (
-            <div key={w.key} className={`fade-in stagger-${Math.min(i + 1, 6)}`}>
-              <article className={`h-full flex flex-col overflow-hidden rounded-tile bg-paper border border-line ${LIFT}`}>
+            <div key={w.key} className={`fade-in stagger-${Math.min(i + 1, 6)} lift`}>
+              <article className="lift-body h-full flex flex-col overflow-hidden rounded-tile bg-paper border border-line">
                 <button
                   type="button"
                   onClick={openPhoto(w.image, t(w.titleKey), w.client)}
