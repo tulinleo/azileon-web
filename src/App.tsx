@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import ScrollManager from './components/ScrollManager'
 import Home from './pages/Home'
 import ProjectsPage from './pages/ProjectsPage'
+import SolutionPage from './pages/SolutionPage'
 
 function Layout() {
   const { lang } = useLang()
@@ -37,6 +38,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="projects" element={<ProjectsPage />} />
+          <Route path="solutions/:slug" element={<SolutionPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

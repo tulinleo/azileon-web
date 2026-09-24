@@ -2,12 +2,18 @@
 
 React 19 + Vite + TypeScript + Tailwind v4, routed with react-router, deployed on Vercel (`vercel.json` rewrites every path to `index.html`).
 
-- `src/pages/Home.tsx` — Hero, Services, Projects carousel, Team, Contact. The hero's illustration is the "Our products"
-  3D showcase (`src/components/ProductShowcase.tsx` + `src/scene/`): the Claude Design scene ported to three.js/TypeScript,
-  fixed camera, loaded lazily and only on md screens and up; label texts live in `src/i18n.tsx` (`showcase*`).
-- `src/pages/ProjectsPage.tsx` — hardware cases and the web portfolio (`src/data/*Projects.ts`). The first web entry is
-  Azileon's own product page, the AI battery dispatcher landing (github.com/zazplay/battery-dispatcher); its link is the
-  landing's URL, update it when the page moves to a subdomain.
+- `/` — `src/pages/Home.tsx`: Hero (with the "Our products" 3D showcase), TrustStrip, Solutions, AI, Process, Projects
+  carousel, Team, Contact.
+- `/solutions/:slug` — `src/pages/SolutionPage.tsx`: one template for the five product lines (parcel-lockers,
+  payment-terminals, smart-vending, websites, solar), driven by `src/data/solutions.ts`; the showcase is focused on that
+  product. Texts are the `sol*` keys in `src/i18n.tsx`.
+- `/projects` — `src/pages/ProjectsPage.tsx`: hardware cases and the web portfolio (`src/data/*Projects.ts`). The first web
+  entry is Azileon's own product page, the AI battery dispatcher landing (`BATTERY_DISPATCHER_URL` in `src/data/solutions.ts`;
+  update it when the page moves to a subdomain).
+
+The 3D showcase (`src/components/ProductShowcase.tsx` + `src/scene/`) is the Claude Design scene ported to three.js/TypeScript,
+fixed camera, loaded lazily and only on md screens and up. Design spec and plan of the current layout:
+`docs/superpowers/specs/2026-09-24-solutions-redesign-design.md`.
 
 ## Template notes
 

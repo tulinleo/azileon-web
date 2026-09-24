@@ -32,8 +32,9 @@ export default function Button({ children, variant = 'primary', href, type = 'bu
   }
 
   if (href) {
+    const external = /^https?:\/\//.test(href) // another site opens in a new tab
     return (
-      <a href={href} onClick={onClick} className={`${className} no-underline`}>
+      <a href={href} onClick={onClick} className={`${className} no-underline`} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
         {children}
         {arrow}
       </a>

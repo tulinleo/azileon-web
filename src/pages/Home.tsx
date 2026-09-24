@@ -1,5 +1,8 @@
 import Hero from '../components/Hero'
-import Services from '../components/Services'
+import TrustStrip from '../components/TrustStrip'
+import Solutions from '../components/Solutions'
+import AiSection from '../components/AiSection'
+import Process from '../components/Process'
 import SectionDivider from '../components/SectionDivider'
 import Projects from '../components/Projects'
 import Team from '../components/Team'
@@ -14,8 +17,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustStrip />
+      <Solutions />
       <SectionDivider />
-      <Services />
+      <AiSection />
+      <SectionDivider />
+      <Process />
       <SectionDivider />
       <Projects />
       <SectionDivider />

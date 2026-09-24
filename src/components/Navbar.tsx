@@ -12,7 +12,8 @@ export default function Navbar() {
   const { pathname } = useLocation()
 
   const links = [
-    { to: '/#services', label: t('navServices') },
+    { to: '/#solutions', label: t('navSolutions'), active: pathname.startsWith('/solutions/') },
+    { to: '/#ai', label: t('navAi') },
     { to: '/projects', label: t('navProjects'), active: pathname === '/projects' },
     { to: '/#team', label: t('navTeam') },
     { to: '/#contact', label: t('navContact') },

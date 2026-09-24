@@ -58,6 +58,8 @@ export type LabelId = (typeof LABEL_IDS)[number]
 
 export interface Showcase {
   root: THREE.Group
+  /** The five products, so a page can show one of them alone. */
+  groups: Record<LabelId, THREE.Group>
   /** Where each label's dot sits: above the object for the floating tier (`above`), under its front edge for the
    *  ground tier; `rise` is the length of the line between the dot and the card, in px. */
   anchors: Record<LabelId, { at: THREE.Vector3; above: boolean; rise: number }>
@@ -731,5 +733,5 @@ export function buildProducts(): Showcase {
     }
   }
 
-  return { root, anchors, update, dispose }
+  return { root, groups: { solar, pay: park, web, vend, lock }, anchors, update, dispose }
 }

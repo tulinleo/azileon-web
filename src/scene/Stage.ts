@@ -82,7 +82,8 @@ export class Stage {
    *  `phoneBox` — a tighter box to frame on narrow screens (the rest of the object may run off the edges).
    *  `margin` — how much of the frame the object's bounds may take: 1 = edge to edge, above 1 the corners run off.
    *  `view` — direction from the object to the camera (default: the mockup's three-quarter view, slightly from above).
-   *  `shadows` — false hides the ground shadow and stops the key light casting (for objects that float). */
+   *  `shadows` — false hides the ground shadow and stops the key light casting (for objects that float).
+   *  `frame` — frame this box instead of the object's own bounds (to show one part of a larger object). */
   setObject(
     object: THREE.Object3D,
     {
@@ -92,7 +93,8 @@ export class Stage {
       margin = 0.96,
       view,
       shadows = true,
-    }: { shiftX?: number; shiftY?: number; phoneBox?: THREE.Box3; margin?: number; view?: [number, number, number]; shadows?: boolean } = {},
+      frame,
+    }: { shiftX?: number; shiftY?: number; phoneBox?: THREE.Box3; margin?: number; view?: [number, number, number]; shadows?: boolean; frame?: THREE.Box3 } = {},
   ) {
     if (this.object) this.scene.remove(this.object);
     this.object = object;
@@ -106,9 +108,10 @@ export class Stage {
         o.receiveShadow = shadows;
       }
     });
-    const box = new THREE.Box3().setFromObject(object);
+    const whole = new THREE.Box3().setFromObject(object);
+    const box = frame ?? whole;
     if (!box.isEmpty()) {
-      this.ground.position.y = box.min.y;
+      this.ground.position.y = whole.min.y;
       const sphere = box.getBoundingSphere(new THREE.Sphere());
       this.sphere = sphere;
       this.box = box;

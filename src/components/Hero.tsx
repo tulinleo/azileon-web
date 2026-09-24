@@ -1,18 +1,12 @@
-import { lazy, Suspense, useSyncExternalStore } from 'react'
+import { lazy, Suspense } from 'react'
 import Button from './Button'
+import { useDesktop } from '../hooks/useDesktop'
 import { useT } from '../i18n'
 
-/* First screen: the pitch on the left, the "Our products" 3D showcase on the right — the products in two tiers,
-   each with its label, on a fixed camera. The showcase carries three.js: loaded on demand, and only where it is
-   shown (md and up); phones get the text alone. */
+/* First screen: the pitch on the left, the "Our products" 3D showcase on the right — the five product lines in
+   two tiers, each with its label, on a fixed camera. The showcase carries three.js: loaded on demand, and only
+   where it is shown (md and up); phones get the text alone. */
 const ProductShowcase = lazy(() => import('./ProductShowcase'))
-const DESKTOP = '(min-width: 768px)'
-const subscribe = (cb: () => void) => {
-  const mq = window.matchMedia(DESKTOP)
-  mq.addEventListener('change', cb)
-  return () => mq.removeEventListener('change', cb)
-}
-const useDesktop = () => useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP).matches, () => false)
 
 export default function Hero() {
   const t = useT()
@@ -32,8 +26,9 @@ export default function Hero() {
           <p className="hero-animate hero-delay-3 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-[46ch] mb-8">
             {t('heroBody')}
           </p>
-          <div className="hero-animate hero-delay-4">
+          <div className="hero-animate hero-delay-4 flex flex-wrap gap-3">
             <Button href="#contact">{t('heroCta')}</Button>
+            <Button href="#solutions" variant="secondary">{t('heroSecondary')}</Button>
           </div>
         </div>
 
