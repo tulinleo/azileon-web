@@ -31,8 +31,11 @@ export default function ProductShowcase() {
       return
     }
     const show = buildProducts()
-    // margin < 1 leaves room around the objects for the labels above the upper tier and below the lower one
-    stage.setObject(show.root, { margin: 1.0, shadows: false })
+    // margin > 1: the scene's bounding box is mostly empty at the corners (two tiers, a deep floor), so the camera
+    // may come closer than "box fits the frame" without any product touching the edge — a little less so in a
+    // narrow box (lg widths), where the ground tier already spans the full width
+    const wide = host.clientWidth / Math.max(1, host.clientHeight) > 1.05
+    stage.setObject(show.root, { margin: wide ? 1.18 : 1.08, shadows: false })
 
     const nodes = LABEL_IDS.map((id) => {
       const el = layer.querySelector<HTMLDivElement>(`[data-id="${id}"]`)!
