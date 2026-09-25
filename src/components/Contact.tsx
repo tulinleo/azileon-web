@@ -1,5 +1,6 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react'
 import { ArrowRight, Envelope } from '@phosphor-icons/react'
+import Button from './Button'
 import { solutions } from '../data/solutions'
 import { useT } from '../i18n'
 
@@ -139,11 +140,7 @@ export default function Contact() {
           ) : (
             state === 'idle' && <span className="text-[13px] text-ink-3 text-center">{t('formNote')}</span>
           )}
-          <button
-            type="submit"
-            disabled={state === 'opening'}
-            className="group flex justify-center items-center gap-2.5 px-7 py-[18px] rounded-btn bg-accent text-white text-base font-semibold border-0 cursor-pointer shadow-[0_10px_24px_-12px_rgba(184,110,47,.8)] hover:bg-accent-hover hover:shadow-[0_14px_28px_-12px_rgba(184,110,47,.9)] disabled:cursor-default"
-          >
+          <Button type="submit" size="lg" arrow={false} disabled={state === 'opening'} className="w-full">
             {state === 'opening' ? (
               <>
                 <span aria-hidden="true" className="w-4 h-4 rounded-full border-2 border-white/35 border-t-white animate-spin-slow" />
@@ -155,7 +152,7 @@ export default function Contact() {
                 <ArrowRight size={16} weight="bold" className="transition-transform duration-300 ease-soft group-hover:translate-x-[3px]" />
               </>
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </section>

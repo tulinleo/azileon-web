@@ -99,7 +99,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <Link to="/#contact" className="az-cta">
+          <Link to="/#contact" className="az-cta btn-primary">
             {t('navCta')}
             <ArrowRight size={14} weight="bold" />
           </Link>
@@ -117,7 +117,7 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link to="/#contact" className="az-menu-cta" onClick={() => setOpen(false)}>
+          <Link to="/#contact" className="az-menu-cta btn-primary" onClick={() => setOpen(false)}>
             {t('navCta')} →
           </Link>
         </nav>

@@ -23,17 +23,18 @@ export default function Hero() {
 
   return (
     <section id="home" className="flex flex-col gap-bento">
-      <div className="bg-surface rounded-card px-[clamp(24px,3.8vw,52px)] py-[clamp(24px,3.4vw,44px)] grid grid-cols-1 min-[900px]:grid-cols-2 gap-x-14 gap-y-6 items-end">
+      <div className="bg-surface rounded-card px-[clamp(24px,3.8vw,52px)] py-[clamp(24px,3.4vw,44px)] grid grid-cols-1 min-[900px]:grid-cols-[1.35fr_1fr] gap-x-14 gap-y-6 items-stretch">
         <div className="flex flex-col">
           <p className="hero-animate hero-delay-1 self-start mb-[22px] inline-flex items-center gap-2 text-[13px] font-medium px-3.5 py-2 rounded-full bg-paper border border-line text-ink-2 whitespace-nowrap">
             <span className="w-[7px] h-[7px] rounded-full bg-ok animate-pulse-dot" />
             {t('heroLabel')}
           </p>
-          <h1 className="hero-animate hero-delay-2 font-heading text-[clamp(2.3rem,4.4vw,4rem)] font-semibold tracking-[-0.045em] leading-none text-balance">
+          <h1 className="hero-animate hero-delay-2 font-heading text-[clamp(2.3rem,4.2vw,3.75rem)] font-semibold tracking-[-0.045em] leading-none text-balance">
             {t('heroTitle')} <span className="text-accent">{t('heroTitleAccent')}</span>
           </h1>
         </div>
-        <div>
+        {/* the right column mirrors the left: the body starts level with the badge, the buttons end level with the headline */}
+        <div className="flex flex-col min-[900px]:justify-between min-[900px]:pt-2">
           <p className="hero-animate hero-delay-3 text-[clamp(16px,1.4vw,18px)] leading-[1.6] text-ink-2 max-w-[52ch] mb-6 text-pretty">{t('heroBody')}</p>
           <div className="hero-animate hero-delay-4 flex flex-wrap gap-2.5">
             <Button href="#contact">{t('heroCta')}</Button>

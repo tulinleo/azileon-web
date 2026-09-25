@@ -25,7 +25,7 @@ export default function BackToTop() {
       onClick={toTop}
       aria-label={t('backToTop')}
       tabIndex={show ? 0 : -1}
-      className={`fixed right-5 bottom-5 z-40 w-12 h-12 rounded-2xl bg-ink text-white grid place-items-center border-0 cursor-pointer shadow-[0_12px_28px_-12px_rgba(26,26,26,.5)] hover:bg-accent hover:text-white ${
+      className={`btn-dark fixed right-5 bottom-5 z-40 w-12 h-12 rounded-2xl grid place-items-center border-0 cursor-pointer ${
         show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'
       }`}
     >

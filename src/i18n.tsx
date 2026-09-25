@@ -53,7 +53,7 @@ export const translations = {
 
     // Hero
     heroLabel: 'Prague-based engineering team',
-    heroTitle: 'Software and AI for self-service devices, payments',
+    heroTitle: 'Software and AI for self-\u2060service devices, payments', // word joiner: no line break at the hyphen
     heroTitleAccent: 'and solar',
     heroBody: 'We build the device software, the back office and the integrations — and the AI that keeps a fleet or a solar plant earning. Delivered with the source code, supported after handover.',
     heroCta: 'Get in touch',

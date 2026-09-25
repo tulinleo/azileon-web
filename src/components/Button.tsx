@@ -23,11 +23,13 @@ const SIZE = {
   lg: 'px-7 py-[18px] text-base font-semibold rounded-btn',
 }
 
+/* The finishes live in index.css ("Buttons"): accent, white and ink, all with the header button's gradient,
+   highlight and shadow. `secondary` is the white one on light cards, `white` the same on accent cards. */
 const VARIANT = {
-  primary: 'bg-accent text-white hover:bg-accent-hover hover:text-white',
-  secondary: 'bg-page text-ink hover:bg-[#E8E2D9] hover:text-ink',
-  white: 'bg-surface text-ink hover:bg-paper hover:text-accent',
-  dark: 'bg-ink text-white hover:bg-accent hover:text-white',
+  primary: 'btn-primary',
+  secondary: 'btn-white',
+  white: 'btn-white',
+  dark: 'btn-dark',
 }
 
 export default function Button({
@@ -41,7 +43,7 @@ export default function Button({
   disabled,
   className: extraClass = '',
 }: ButtonProps) {
-  const className = `group inline-flex items-center justify-center gap-2.5 font-medium whitespace-nowrap border-0 cursor-pointer no-underline disabled:opacity-70 disabled:cursor-default ${SIZE[size]} ${VARIANT[variant]} ${extraClass}`
+  const className = `group inline-flex items-center justify-center gap-2.5 font-medium whitespace-nowrap border-0 cursor-pointer no-underline ${SIZE[size]} ${VARIANT[variant]} ${extraClass}`
   const Icon = arrow === 'external' ? ArrowUpRight : ArrowRight
   const tail = arrow ? <Icon size={size === 'sm' ? 14 : 16} weight="bold" className="transition-transform duration-300 ease-soft group-hover:translate-x-[3px]" /> : null
 
