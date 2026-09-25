@@ -229,6 +229,13 @@ input:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(184, 110, 47, .14); }
 .btn-primary:active, .btn-white:active, .btn-dark:active { transform: scale(.97); }
 .btn-primary:disabled, .btn-white:disabled, .btn-dark:disabled { opacity: .7; cursor: default; transform: none; }
 
+/* The projects row (components/Projects.tsx): while the mouse drags it, the snap points let go and the cursor
+   says so; the cards' hover lift is paused so the row does not bob under the hand. */
+.carousel { cursor: grab; scroll-behavior: smooth; }
+.carousel.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+.carousel.is-dragging .lift-body { transform: none !important; box-shadow: none !important; }
+.carousel .lift:active { transform: none; }
+
 /* Hover lift without the jitter: the element that takes the hover (.lift) never moves, so the pointer cannot slip
    off its edge while the card rises; only its body (.lift-body) is transformed, on its own compositor layer so the
    text stays crisp through the motion. `.lift-sm` is the gentler 3px version. */

@@ -240,6 +240,14 @@ export class Stage {
     el.addEventListener('lostpointercapture', up);
   }
 
+  /** Draw one frame now and hand it back as a PNG data URL — for stills. The canvas is read in the same task as the
+   *  draw, which is what makes the read-back reliable without preserveDrawingBuffer. */
+  renderOnce(): string {
+    this.updateCamera();
+    this.renderer.render(this.scene, this.camera);
+    return this.renderer.domElement.toDataURL('image/png');
+  }
+
   /** Run `fn` before every rendered frame; pass null to stop. */
   setAnimationLoop(fn: (() => void) | null) {
     this.renderer.setAnimationLoop(

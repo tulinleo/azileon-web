@@ -1,25 +1,18 @@
 import { lazy, Suspense } from 'react'
-import { CheckCircle } from '@phosphor-icons/react'
 import Button from './Button'
 import ShowcaseSkeleton from './ShowcaseSkeleton'
 import { useDesktop } from '../hooks/useDesktop'
 import { useT } from '../i18n'
 
-/* First screen, three cards: the pitch (badge and headline left, body and buttons right, bottom-aligned), the
-   "Our products" 3D showcase on a paper card, and three facts in ink / white / accent. The showcase carries
-   three.js: loaded on demand and only where it is shown (md and up); phones get the text and the facts. */
+/* First screen, two cards: the pitch (badge and headline left, body and buttons right) and the "Our products" 3D
+   showcase on a paper card. The showcase carries three.js: loaded on demand and only where it is shown (md and up);
+   phones get the text alone. */
 const ProductShowcase = lazy(() => import('./ProductShowcase'))
 
-const FACT_TONE = [
-  { card: 'bg-ink text-paper', icon: 'text-accent-2' },
-  { card: 'bg-surface text-ink', icon: 'text-accent' },
-  { card: 'bg-accent text-white', icon: 'text-white' },
-]
 
 export default function Hero() {
   const t = useT()
   const desktop = useDesktop()
-  const facts = [t('trustFact1'), t('trustFact2'), t('trustFact3')]
 
   return (
     <section id="home" className="flex flex-col gap-bento">
@@ -56,16 +49,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 auto-rows-fr gap-bento">
-        {facts.map((f, i) => (
-          <div key={f} className={`hero-animate hero-delay-${i + 2} lift lift-sm`}>
-            <div className={`lift-body h-full rounded-inner p-5 min-h-[120px] flex flex-col justify-between gap-3 text-base font-medium leading-[1.4] ${FACT_TONE[i].card}`}>
-              <CheckCircle size={20} weight="bold" className={FACT_TONE[i].icon} />
-              {f}
-            </div>
-          </div>
-        ))}
-      </div>
     </section>
   )
 }

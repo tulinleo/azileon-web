@@ -20,10 +20,6 @@ export type Solution = {
   features: TKey[]
   /** Protocols, hardware and services — the same in every language. */
   chips: string[]
-  /** The picture on the home-page card (a project photo); without one the card shows the product from the 3D scene. */
-  image?: string
-  /** CSS object-position for that picture. */
-  imagePosition?: string
   caseStudy?: { title: TKey; text: TKey; to: string; external?: boolean; image?: string }
 }
 
@@ -44,7 +40,6 @@ export const solutions: Solution[] = [
     ],
     features: ['solLockersF1', 'solLockersF2', 'solLockersF3', 'solLockersF4', 'solLockersF5', 'solLockersF6'],
     chips: ['RS-485 / CAN lock controllers', 'Modbus', 'MQTT', 'REST & webhooks', 'Linux / Android', 'LTE routers'],
-    image: asset('/projects/kosik-box.webp'),
     caseStudy: { title: 'solLockersCase', text: 'projKosikTask', to: '/projects#hardware', image: asset('/projects/kosik-box.webp') },
   },
   {
@@ -60,7 +55,6 @@ export const solutions: Solution[] = [
     ],
     features: ['solPaymentsF1', 'solPaymentsF2', 'solPaymentsF3', 'solPaymentsF4', 'solPaymentsF5', 'solPaymentsF6'],
     chips: ['EMV terminals', 'MDB / ccTalk cash modules', 'ESC/POS & fiscal printers', 'PSP APIs', 'Android / Windows / Linux kiosks'],
-    image: asset('/projects/kiosk-device.webp'),
     caseStudy: { title: 'solPaymentsCase', text: 'projKioskTask', to: '/projects#hardware', image: asset('/projects/kiosk-device.webp') },
   },
   {
@@ -90,8 +84,6 @@ export const solutions: Solution[] = [
     ],
     features: ['solWebF1', 'solWebF2', 'solWebF3', 'solWebF4', 'solWebF5', 'solWebF6'],
     chips: ['WordPress · Sage', 'WooCommerce', 'React', 'Node.js', 'Vite', 'Vercel'],
-    image: asset('/projects/web/anand.webp'),
-    imagePosition: 'top',
     caseStudy: { title: 'solWebCase', text: 'webSectionIntro', to: '/projects#web', image: asset('/projects/web/legalwaw.webp') },
   },
   {
@@ -107,8 +99,6 @@ export const solutions: Solution[] = [
     ],
     features: ['solSolarF1', 'solSolarF2', 'solSolarF3', 'solSolarF4', 'solSolarF5', 'solSolarF6'],
     chips: ['Modbus TCP / RTU', 'SunSpec', 'MQTT', 'Huawei · SMA · Fronius · SolarEdge · Sungrow · GoodWe', 'FusionSolar / SolarEdge / SEMS APIs'],
-    image: asset('/projects/web/battery-dispatcher.webp'),
-    imagePosition: 'top',
     caseStudy: { title: 'solSolarCase', text: 'webBatteryDesc', to: BATTERY_DISPATCHER_URL, external: true, image: asset('/projects/web/battery-dispatcher.webp') },
   },
 ]
